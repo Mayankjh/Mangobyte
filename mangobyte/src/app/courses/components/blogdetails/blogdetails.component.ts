@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 declare var $:any;
 @Component({
-  selector: 'app-acad',
-  templateUrl: './acad.component.html',
-  styleUrls: ['./acad.component.scss']
+  selector: 'app-blogdetails',
+  templateUrl: './blogdetails.component.html',
+  styleUrls: ['./blogdetails.component.scss']
 })
-export class AcadComponent implements AfterViewInit {
+export class BlogdetailsComponent implements AfterViewInit {
 
   constructor() { }
 

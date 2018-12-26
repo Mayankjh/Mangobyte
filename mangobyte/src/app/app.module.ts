@@ -16,6 +16,7 @@ import { ContactComponent } from './contact/contact.component';
 import { DetailsComponent } from './courses/components/details/details.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
+import { BlogdetailsComponent } from './courses/components/blogdetails/blogdetails.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
       {path: 'public', component:PublicComponent},
       {path: 'corporate', component:CorporateComponent},
       {path: 'politics', component:PoliticsComponent},
+      {path: 'blogdetails', component:BlogdetailsComponent},
       { path: '',
         redirectTo: '/courses/details',
         pathMatch: 'full'
@@ -55,7 +57,8 @@ const appRoutes: Routes = [
     ContactComponent,
     DetailsComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    BlogdetailsComponent
   ],
   imports: [
     BrowserModule,

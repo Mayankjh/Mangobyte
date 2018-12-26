@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+declare var $:any;
 @Component({
   selector: 'app-mentors',
   templateUrl: './mentors.component.html',
   styleUrls: ['./mentors.component.scss']
 })
-export class MentorsComponent implements OnInit {
+export class MentorsComponent implements AfterViewInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    $.getScript('../assets/js/main.js');
   }
+
 
 }
