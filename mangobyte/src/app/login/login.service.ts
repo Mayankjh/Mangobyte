@@ -4,7 +4,7 @@ import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
   providedIn: 'root'
 })
 export class LoginService {
-  public serverurl:string="http://localhost:8000/";
+  public serverurl:string="https://hashblog.herokuapp.com/";
   public csrfmiddleware:string;
   public cookietoken:string;
   public logdetails={}
@@ -14,7 +14,10 @@ export class LoginService {
      * 1 . Contact server to get details of cookies and all....
      * 2 . Save those details in local variable
      */
+    this.serverurl = "http://localhost:8000/"
     http.get(this.serverurl+"cookiestoken/", {
+      headers:new HttpHeaders()
+        .set('Content-type', 'text/plain'),
       withCredentials:true
       } ).subscribe((data)=>{
       this.csrfmiddleware = data['csrfmiddlewaretoken'];
