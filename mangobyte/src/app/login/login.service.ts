@@ -4,7 +4,7 @@ import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
   providedIn: 'root'
 })
 export class LoginService {
-  public serverurl:string="http://localhost:8000/";
+  public serverurl:string="https://hashblog.herokuapp.com/";
   public csrfmiddleware:string;
   public cookietoken:string;
   public logdetails={}
