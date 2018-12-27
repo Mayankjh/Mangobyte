@@ -16,6 +16,8 @@ import { ContactComponent } from './contact/contact.component';
 import { DetailsComponent } from './courses/components/details/details.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
+import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
@@ -55,12 +57,14 @@ const appRoutes: Routes = [
     ContactComponent,
     DetailsComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes, {enableTracing:false}),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

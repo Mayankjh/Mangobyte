@@ -14,10 +14,16 @@
           <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
           <li class="nav-item"><a href="event.html" class="nav-link">Events</a></li>
           <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-          <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Apply Now!</span></a></li>
+          <li class="nav-item cta"><a class="nav-link" onclick="logindiv" (click)="showlogin()"><span>Login</span></a></li>
         </ul>
       </div>
     </div>
   </nav>
-
+<div id="logindiv" style="display: none;z-index:3;position:fixed; top:10px; bottom:10px; left:10px;right:10px; opacity:0.9; background-color: black;">  
+  <button 
+    style="position: absolute; right:5px; top:5px;color: white; background-color: black; border: black; "
+    (click)="hidelogin()"
+    >x</button>
+  <app-login></app-login>
+</div>
   

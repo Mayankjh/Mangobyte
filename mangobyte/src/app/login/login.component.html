@@ -1,0 +1,16 @@
+  <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);">
+    <div *ngIf='logindetails["loginstatus"]==false'>
+        <p>
+            <label>Username :</label>
+            <input type="text"  id="loginformuser">
+          </p>
+          <p>
+              <label>Password :</label>
+              <input type="password"  id="loginformpass">
+            </p>
+          <p>
+            <button type="button" (click)='login()'>Login</button>
+          </p>
+    </div>
+    <button *ngIf='logindetails["loginstatus"]==true' (click)='logout()'>logout</button>
+  </div>
