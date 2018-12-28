@@ -1,5 +1,5 @@
   <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);">
-    <div *ngIf='logindetails["loginstatus"]==false'>
+    <div *ngIf='ls.data.islogged!=true'>
         <p>
             <label>Username :</label>
             <input type="text"  id="loginformuser">
@@ -12,5 +12,6 @@
             <button type="button" (click)='login()'>Login</button>
           </p>
     </div>
-    <button *ngIf='logindetails["loginstatus"]==true' (click)='logout()'>logout</button>
+    <button *ngIf='ls.data.islogged==true' (click)='logout()'>logout</button>
+  
   </div>

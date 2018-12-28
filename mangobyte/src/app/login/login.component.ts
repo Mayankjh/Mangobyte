@@ -7,25 +7,17 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  public logindetails:any={
-    'loginstatus':false,
-    'id':-1
-  };
   constructor(private ls:LoginService, private cdr:ChangeDetectorRef) {
     var self=this;
-    this.ls.refreshfunctions.push(
-      ()=>{
-        self.logindetails=self.ls.logdetails;
-        console.log(self.logindetails);
-        self.cdr.detectChanges();
-      }
-    ); 
+    ls.child=self;
   }
   ngOnInit() {
   }
+  ngAfterViewInit(){
+    var self=this;
+    
+  }
   refresh(){
-    this.logindetails=this.ls.logdetails;
-    console.log(this.logindetails);
     this.cdr.detectChanges();
   }
   login(){
