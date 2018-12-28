@@ -1,8 +1,8 @@
 <span *ngIf='ls.data.islogged==false' (click)='showlogin()'>
   Login
 </span>
-<span *ngIf='ls.data.islogged' (click)='logout()'>
-    Logout
+<span *ngIf='ls.data.islogged' (click)='showlogin()'>
+    My Profile
 </span>
   
 
@@ -30,14 +30,34 @@
                     
                   </p>
             </div>
-            <button *ngIf='ls.data.islogged==true' (click)='logout()'
-            style="
-               border: 0;
-                background: red;
-                border-radius: 50px;
-                width: 100%;
-              "
-            >logout</button>
         </div>
+        <div *ngIf='ls.data.islogged==true' style="padding:5px;">
+            <h1 style="position: absolute; top:10px; left:10px;">My Profile</h1>
+            <br>
+            <br>
+            <br>
+            <p><small>Welcome user(get profile info and show here, not important)</small></p>
+            <br>  
+            <button>Google Login</button>
+            <br>
+            <button>My Blogs -></button>
+            <br><br>
+            <div>Quick links</div>
+            <ul>
+              <li>Most viewd blogs</li>
+              <li>Recent Blog</li>
+              <li> Create Blog</li>
+            </ul>
+            <button (click)='logout()'
+              style="
+                 border: 0;
+                  background: red;
+                  border-radius: 50px;
+                  position: absolute;
+                  bottom: 10px;
+                  right: 10px;
+                "
+              >logout</button>
+          </div>
         
 </div>
