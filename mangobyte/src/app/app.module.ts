@@ -19,6 +19,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BlogdetailsComponent } from './courses/components/blogdetails/blogdetails.component';
+import { BlogComponent } from './blog/blog.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
@@ -61,7 +62,8 @@ const appRoutes: Routes = [
     NavComponent,
     FooterComponent,
     LoginComponent,
-    BlogdetailsComponent
+    BlogdetailsComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
