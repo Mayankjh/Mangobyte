@@ -11,13 +11,5 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
   }
-  hidelogin(){
-    document.getElementById("logindiv").style.display="none";
-    console.log("login hidden");
-  }
-  showlogin(){
-    document.getElementById("logindiv").style.display="block";
-    console.log("login shown");
-  }
 
 }

@@ -36,11 +36,10 @@ export class LoginService {
       
     }
     //console.log('I was here');*/
-    //this.serverurl = "http://localhost:8000/";
+    this.serverurl = "http://localhost:8000/";
 
   }
   login(username:string, password:string){
-    
     this.http.post(this.serverurl+'login',
         new HttpParams()
           .set('username', username)
@@ -59,11 +58,16 @@ export class LoginService {
           localStorage.setItem('auth_token', this.data.token);
           localStorage.setItem('id', this.data.id+'');
 
-        } else if(response.status==400 || 404){
-          // failure
-          alert('Wrong credentials were provided');
-        }
+        } 
         this.child.refresh();
+      }, (error)=>{
+        if(error.status==400 || 404){
+          // failure
+          alert('Wrong credentials were provided, please provide the correct details');
+        }
+        //console.log(error);
+      }, ()=>{
+        console.log();
       });
   }
 
@@ -90,7 +94,7 @@ export class LoginService {
           // failure
           alert('Wrong credentials were provided');
         }
-        console.log(response, this.child);
+        //console.log(response, this.child);
         this.child.refresh();
       });
   }

@@ -17,6 +17,14 @@ export class LoginComponent implements OnInit {
     var self=this;
     
   }
+  hidelogin(){
+    document.getElementById("logindiv").style.display="none";
+    console.log("login hidden");
+  }
+  showlogin(){
+    document.getElementById("logindiv").style.display="block";
+    console.log("login shown");
+  }
   refresh(){
     this.cdr.detectChanges();
   }
@@ -30,8 +38,6 @@ export class LoginComponent implements OnInit {
   }
   logout(){
     var self=this;
-    this.ls.logout((data)=>{
-      self.refresh();
-    });
+    this.ls.logout();
   }
 }

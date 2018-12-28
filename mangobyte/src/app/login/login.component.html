@@ -1,17 +1,43 @@
-  <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);">
-    <div *ngIf='ls.data.islogged!=true'>
-        <p>
-            <label>Username :</label>
-            <input type="text"  id="loginformuser">
-          </p>
-          <p>
-              <label>Password :</label>
-              <input type="password"  id="loginformpass">
-            </p>
-          <p>
-            <button type="button" (click)='login()'>Login</button>
-          </p>
-    </div>
-    <button *ngIf='ls.data.islogged==true' (click)='logout()'>logout</button>
+<span *ngIf='ls.data.islogged==false' (click)='showlogin()'>
+  Login
+</span>
+<span *ngIf='ls.data.islogged' (click)='logout()'>
+    Logout
+</span>
   
-  </div>
+
+<div id="logindiv" style="display: none;z-index:3;position:fixed; top:10px; bottom:10px; left:10px;right:10px; opacity:0.9; background-color: rgb(247, 178, 35">  
+      <button 
+        style="position: absolute; right:5px; top:5px;color: white; background-color: rgb(247, 178, 35); border: rgb(247, 178, 35); "
+        (click)="hidelogin()"
+        >x</button>
+        <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);">
+            <div *ngIf='ls.data.islogged!=true'>
+                <p>
+                    <label>Username :</label>
+                    <input type="text"  id="loginformuser">
+                  </p>
+                  <p>
+                      <label>Password :</label>
+                      <input type="password"  id="loginformpass">
+                    </p>
+                  <p>
+                    <button type="button" (click)='login()' style="
+                    border: 0;
+                    background: lawngreen;
+                    border-radius: 50px;
+                    width: 100%;" >Login</button>
+                    
+                  </p>
+            </div>
+            <button *ngIf='ls.data.islogged==true' (click)='logout()'
+            style="
+               border: 0;
+                background: red;
+                border-radius: 50px;
+                width: 100%;
+              "
+            >logout</button>
+        </div>
+        
+</div>
