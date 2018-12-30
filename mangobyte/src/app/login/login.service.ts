@@ -12,7 +12,7 @@ export class LoginService {
     token:string 
   }
   public child;
-  constructor(private http: HttpClient) { 
+  constructor(public http: HttpClient) { 
     /**
      * 1 . Contact server to get details of cookies and all....
      * 2 . Save those details in local variable

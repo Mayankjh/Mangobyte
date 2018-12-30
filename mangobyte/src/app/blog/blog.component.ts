@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { BlogService } from './blog.service';
 
 @Component({
   selector: 'app-blog',
@@ -7,11 +8,19 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BlogComponent implements OnInit {
   @Input() do:any;
-  constructor() {
-
+  public blog:any;
+  refreshed=false;
+  constructor(private bs:BlogService,private cdr:ChangeDetectorRef) {
   }
-
+  refresh(){
+    this.refreshed=true;
+    console.log('I was called');
+    this.cdr.detectChanges();
+  }
   ngOnInit() {
+    this.bs.child = this;
+    var self=this;
+    this.bs.getblog(this.do['id'], self);
   }
 
 }
