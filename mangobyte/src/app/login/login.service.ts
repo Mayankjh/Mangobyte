@@ -36,7 +36,7 @@ export class LoginService {
       
     }
     //console.log('I was here');*/
-    this.serverurl = "http://localhost:8000/";
+    // this.serverurl = "http://localhost:8000/";
 
   }
   login(username:string, password:string){
