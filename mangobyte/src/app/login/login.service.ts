@@ -8,39 +8,51 @@ export class LoginService {
   public serverurl:string="http://hashblog.herokuapp.com/";
   public data:{
     islogged:boolean,
-    id:number,
     token:string 
   }
+  public user:any;
   public child;
   constructor(public http: HttpClient) { 
-    /**
-     * 1 . Contact server to get details of cookies and all....
-     * 2 . Save those details in local variable
-     */
-    // check if auth toke exists or not
+    this.data={
+      islogged:false,
+      token:''
+    }
+    //this.serverurl = "http://localhost:8000/";
     var token = localStorage.getItem('auth_token');
     if(token==null){
       // user not logged
-      this.data={
-        islogged:false,
-        id:-1,
-        token:''
-      }
+      
     } else {
-      // user is logged
-      this.data={
-        islogged:true,
-        id:Number(localStorage.getItem('auth_id')),
-        token:token
-      }
+      // user can be logged
+      this.check_user();
       
     }
-    //console.log('I was here');*/
-    // this.serverurl = "http://localhost:8000/";
+     /*window['httpclient']=this.http;
+     window['httpheader']=new HttpHeaders();
+     window['httpparam']=new HttpParams();*/
 
   }
+  check_user(){
+    this.http.get(this.serverurl+'users/1/', 
+    { 
+      headers:new HttpHeaders()
+        .set('Authorization', 'Token '+localStorage.auth_token)
+    }
+    ).subscribe(data=>{
+        this.user = data;
+        this.data.islogged = true;
+        this.data.token = localStorage.getItem('auth_token')
+        console.log(data)
+      }, error=>{
+        this.data={
+          islogged:false,
+          token:''
+        }
+        localStorage.removeItem('auth_token');
+    })
+  }
   login(username:string, password:string){
-    this.http.post(this.serverurl+'login',
+    this.http.post(this.serverurl+'login/',
         new HttpParams()
           .set('username', username)
           .set('password', password),
@@ -49,15 +61,13 @@ export class LoginService {
           observe:'response'
         }
       ).subscribe((response)=>{
+        //console.log(response);
         if(response.status==200){
           //login sucessfull
           var data = response.body;
           this.data.token = data['token'];
-          this.data.id=data['id'];
           this.data.islogged=true;
           localStorage.setItem('auth_token', this.data.token);
-          localStorage.setItem('id', this.data.id+'');
-
         } 
         this.child.refresh();
       }, (error)=>{
@@ -65,28 +75,27 @@ export class LoginService {
           // failure
           alert('Wrong credentials were provided, please provide the correct details');
         }
-        //console.log(error);
       }, ()=>{
         console.log();
       });
   }
 
   logout(){
-    this.http.get(this.serverurl+'logout',
+    this.http.post(this.serverurl+'logout/',{},
         { 
           // no headers needed to be sent this time
           observe:'response',
           headers:new HttpHeaders()
-            .set('Authorization', 'token '+this.data.token)
+            .set('Authorization', 'Token '+this.data.token)
         }
       ).subscribe((response)=>{
-        if(response.status==200 && response.body['status']=='loggedout'){
+        console.log(response);
+        localStorage.removeItem('auth_token');
+        if(response.status==200 || response.status==204){
           
           localStorage.removeItem('auth_token');
-          localStorage.removeItem('id');
           this.data={
             islogged:false,
-            id:-1,
             token:''
           }
 
@@ -96,6 +105,12 @@ export class LoginService {
         }
         //console.log(response, this.child);
         this.child.refresh();
+      }, (error)=>{
+        localStorage.removeItem('auth_token');
+        this.data={
+          islogged:false,
+          token:''
+        }
       });
   }
 }
