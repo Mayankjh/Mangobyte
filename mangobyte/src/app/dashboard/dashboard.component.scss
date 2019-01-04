@@ -1,11 +1,12 @@
 
+
 .sidebar {
     margin: 0;
     padding: 0;
     width: 200px;
     background-color: #fff;
     position: fixed;
-    height: 100%;
+    min-height: 1000px;
     overflow: auto;
   }
   
@@ -30,7 +31,7 @@
     background: #eef5f9;
     margin-left: 200px;
     padding: 1px 16px;
-    height: 1000px;
+    height: 100%;
   }
   
   @media screen and (max-width: 700px) {
