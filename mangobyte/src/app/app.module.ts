@@ -21,6 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BlogdetailsComponent } from './courses/components/blogdetails/blogdetails.component';
 import { BlogComponent } from './blog/blog.component';
 import { InterviewsComponent } from './courses/components/interviews/interviews.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { IntervComponent } from './dashboard/components/interv/interv.component';
+import { CourComponent } from './dashboard/components/cour/cour.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
@@ -39,6 +42,16 @@ const appRoutes: Routes = [
       {path: 'blogdetails', component:BlogdetailsComponent},
       { path: '',
         redirectTo: '/courses/details',
+        pathMatch: 'full'
+      },
+    ]
+  },
+  { path: 'dashboard', component: DashboardComponent,
+    children: [
+      {path: 'cour', component:CourComponent},
+      {path: 'interv', component:IntervComponent},
+      { path: '',
+        redirectTo: '/dashboard',
         pathMatch: 'full'
       },
     ]
@@ -66,7 +79,10 @@ const appRoutes: Routes = [
     LoginComponent,
     BlogdetailsComponent,
     BlogComponent,
-    InterviewsComponent
+    InterviewsComponent,
+    DashboardComponent,
+    IntervComponent,
+    CourComponent
   ],
   imports: [
     BrowserModule,
