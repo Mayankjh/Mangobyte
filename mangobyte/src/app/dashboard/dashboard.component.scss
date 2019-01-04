@@ -1,4 +1,5 @@
 
+
 .sidebar {
     margin: 0;
     padding: 0;
@@ -29,8 +30,8 @@
   div.content {
     background: #eef5f9;
     margin-left: 200px;
-    padding: 1px 16px;
-    height: 1000px;
+    padding: 16px 16px;
+    height: 100%;
   }
   
   @media screen and (max-width: 700px) {
