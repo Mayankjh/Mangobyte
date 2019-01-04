@@ -1,9 +1,9 @@
 <li *ngFor="let blgc of clevelblogs" class="list-group-item">
-    <button (click)="toggle_child(blgc);">-</button>
+    <button class="btn btn-danger" (click)="toggle_child(blgc);"><i style="font-size:15px;" class="fas fa-minus"></i></button>
     <span>
         {{BCS.BlogCategories[blgc].name}}
     </span>
-    <input type="radio" name="shit" id="">
+    <input type="radio" style="float:right;" name="shit" id="">
     <ul class="list-group inner" id="{{blgc}}" style="display: none;">
         <app-blogcategory [childBlogCategories]="blgc"></app-blogcategory>
     </ul>
