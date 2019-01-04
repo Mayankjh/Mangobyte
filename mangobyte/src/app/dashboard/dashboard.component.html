@@ -1,10 +1,17 @@
 <div class="sidebar">
-  <a class="active" ><i class="fas fa-user"></i> Hi User</a>
-  <a href="/home"><i class="fas fa-home"></i> Home</a>
-  <a href="/dashboard/interv"> <i class="fas fa-chalkboard-teacher"></i> Interviews</a>
-  <a href="/dashboard/cour"><i class="fas fa-user-graduate"></i> Courses</a>
-  <a><i class="fas fa-power-off"></i> Logout</a>
-</div>
+        <a class="active" ><i class="fas fa-user"></i> Hi</a>
+    <ng-container  *ngFor="let nav of nav_list" >
+            <a 
+                href="javascript:void(0)"
+                [ngClass]="{'active':nav_selected==nav[0]}"
+                (click)="updatenav(nav);"
+                >
+
+                    <i class="fas fa-{{ nav[1] }}"></i> 
+                    {{ nav[0] }}
+            </a>
+    </ng-container>
+    </div>
 <div class="content">
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
@@ -14,5 +21,8 @@
             <a style="border-radius:4px;background:#fc4b6c;color:white;float:right;" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"> Upgrade to Pro</a>
         </div>
     </div>
-  <router-outlet></router-outlet>
+    <ng-container  *ngIf="nav_selected=='home'">
+                This is the tribune to tailava
+            lol
+    </ng-container>
 </div>
