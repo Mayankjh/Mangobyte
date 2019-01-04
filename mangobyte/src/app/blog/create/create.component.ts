@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateComponent implements OnInit {
 
-  constructor() { }
+  blogCategories
+  constructor() {
+    this.blogCategories='root'
+   }
 
   ngOnInit() {
+    
   }
 
 }

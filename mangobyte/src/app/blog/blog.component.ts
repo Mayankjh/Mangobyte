@@ -20,7 +20,8 @@ export class BlogComponent implements OnInit {
   ngOnInit() {
     this.bs.child = this;
     var self=this;
-    this.bs.getblog(this.do['id'], self);
+    if(this.do.show!="create")
+      this.bs.getblog(this.do['id'], self);
   }
 
 }

@@ -17,7 +17,7 @@ export class LoginService {
       islogged:false,
       token:''
     }
-    //this.serverurl = "http://localhost:8000/";
+    this.serverurl = "http://localhost:8000/";
     var token = localStorage.getItem('auth_token');
     if(token==null){
       // user not logged

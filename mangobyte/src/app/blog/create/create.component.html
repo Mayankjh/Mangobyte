@@ -1,3 +1,35 @@
-<p>
-  create works!
-</p>
+
+<div class="row ">
+  <div class="col-md-6">
+      <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Create Blog</h5>
+            <div class="card-body">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Name :</span>
+                </div>
+                <input class="form-control" type="text">
+                <div class="input-group-append">
+                </div>
+              </div>
+        
+        
+        
+            </div>
+        
+          </div>
+        </div>
+  </div>
+  <div class="col-md-6">
+      <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Blog Categories</h5>
+            <div class="card-body">
+              <app-blogcategory [childBlogCategories]="blogCategories"></app-blogcategory>
+            </div>
+        
+          </div>
+        </div>
+  </div>
+</div>

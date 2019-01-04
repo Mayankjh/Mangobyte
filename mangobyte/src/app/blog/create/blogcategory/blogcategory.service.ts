@@ -12,8 +12,11 @@ export class BlogcategoryService {
    }
   getAllBlogCategories(){
     this.ls.http.get(this.ls.serverurl+'blogs/blogcategory/').subscribe(
-      data=>{
-        console.log(data);
+      (data:any)=>{
+        //console.log(data);
+        data.forEach(element => {
+          this.BlogCategories[element.url]=element;
+        });
       },
       error=>{
         console.log(error);

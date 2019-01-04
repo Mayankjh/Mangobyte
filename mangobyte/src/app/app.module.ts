@@ -21,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BlogdetailsComponent } from './courses/components/blogdetails/blogdetails.component';
 import { BlogComponent } from './blog/blog.component';
 import { InterviewsComponent } from './courses/components/interviews/interviews.component';
+import { CreateComponent } from './blog/create/create.component';
+import { BlogcategoryComponent } from './blog/create/blogcategory/blogcategory.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
@@ -66,7 +68,9 @@ const appRoutes: Routes = [
     LoginComponent,
     BlogdetailsComponent,
     BlogComponent,
-    InterviewsComponent
+    InterviewsComponent,
+    CreateComponent,
+    BlogcategoryComponent
   ],
   imports: [
     BrowserModule,

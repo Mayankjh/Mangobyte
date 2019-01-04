@@ -1,7 +1,4 @@
 <div *ngIf="this.refreshed==true">
-  <div *ngIf="do.show=='create'">
-        <app-create></app-create>
-  </div>    
   <div *ngIf="do.show=='preview'">
     Name of the blog: <h1>{{ blog.name}}</h1>
     Image preview link : {{ blog.body.preview.image }} <br>
@@ -22,3 +19,7 @@
         Readable by private : {{ blog.body.private }} <br>
     </div>
 </div>
+<div *ngIf="do.show=='create'">
+    <app-create></app-create>
+</div>    
+

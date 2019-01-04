@@ -11,12 +11,13 @@ export class BlogService {
   
   }
   getblog(no, child){
-    this.ls.http.get(this.ls.serverurl+"blogs/"+no+"/",
+    console.log(this.ls.data.token);
+    this.ls.http.get(this.ls.serverurl+"blogs/blog/"+no+"/",
         {
           headers: new HttpHeaders()
-          .set('Authorization', 'token '+this.ls.data.token)
+          .set('Authorization', 'Token '+this.ls.data.token)
         }
-    ).subscribe(data=>{console.log(data); child.blog=data;child.refresh();});
+    ).subscribe(data=>{console.log(data); child.blog=data;child.refresh();}, error=>{console.log(error)});
   }
 }
 
