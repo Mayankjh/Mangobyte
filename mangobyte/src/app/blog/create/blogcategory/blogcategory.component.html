@@ -1,5 +1,10 @@
-<li *ngFor="let blgc of clevelblogs" class="list-group-item">{{BCS.BlogCategories[blgc].name}}
-    <ul class="list-group inner">
+<li *ngFor="let blgc of clevelblogs" class="list-group-item">
+    <button (click)="toggle_child(blgc);">-</button>
+    <span>
+        {{BCS.BlogCategories[blgc].name}}
+    </span>
+    <input type="radio" name="shit" id="">
+    <ul class="list-group inner" id="{{blgc}}" style="display: none;">
         <app-blogcategory [childBlogCategories]="blgc"></app-blogcategory>
     </ul>
 </li>

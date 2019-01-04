@@ -29,7 +29,12 @@ export class BlogcategoryComponent implements OnInit {
     this.cdr.detectChanges();
     console.log('I was calledd')
   }
-  
+  toggle_child(blgc){
+    var e=document.getElementById(blgc);
+    if(e.style.display=='none') e.style.display='block';
+    else e.style.display='none';
+  }
+  hide_child=true;
 
 }
 
