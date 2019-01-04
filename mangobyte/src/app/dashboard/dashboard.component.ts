@@ -10,7 +10,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private ls:LoginService, private cdr:ChangeDetectorRef) { }
   nav_list=[
-    ["home", "home"],
+    ["Home", "home"],
     ["Interviews", "chalkboard-teacher"],
     ["Courses", "user-graduate"],
     ["Logout", "power-off"]  

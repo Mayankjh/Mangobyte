@@ -1,5 +1,5 @@
 <div class="sidebar">
-        <a class="active" ><i class="fas fa-user"></i> Hi</a>
+        <a style="background:#fc4b6c;color:white;" ><i class="fas fa-user"></i> Hi</a>
     <ng-container  *ngFor="let nav of nav_list" >
             <a 
                 href="javascript:void(0)"
@@ -21,8 +21,14 @@
             <a style="border-radius:4px;background:#fc4b6c;color:white;float:right;" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"> Upgrade to Pro</a>
         </div>
     </div>
-    <ng-container  *ngIf="nav_selected=='home'">
+    <ng-container  *ngIf="nav_selected=='Home'">
                 This is the tribune to tailava
             lol
     </ng-container>
+    <ng-container  *ngIf="nav_selected=='Interviews'">
+           <app-interv></app-interv>
+</ng-container>
+<ng-container  *ngIf="nav_selected=='Courses'">
+     <app-cour></app-cour>
+</ng-container>
 </div>
