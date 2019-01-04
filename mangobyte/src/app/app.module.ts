@@ -20,9 +20,12 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BlogdetailsComponent } from './courses/components/blogdetails/blogdetails.component';
 import { BlogComponent } from './blog/blog.component';
+import {BlogcategoryComponent} from './blog/create/blogcategory/blogcategory.component';
 import { InterviewsComponent } from './courses/components/interviews/interviews.component';
-import { CreateComponent } from './blog/create/create.component';
-import { BlogcategoryComponent } from './blog/create/blogcategory/blogcategory.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { IntervComponent } from './dashboard/components/interv/interv.component';
+import { CourComponent } from './dashboard/components/cour/cour.component';
+import { CreateComponent } from './blog/create/create.component'
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
@@ -41,6 +44,16 @@ const appRoutes: Routes = [
       {path: 'blogdetails', component:BlogdetailsComponent},
       { path: '',
         redirectTo: '/courses/details',
+        pathMatch: 'full'
+      },
+    ]
+  },
+  { path: 'dashboard', component: DashboardComponent,
+    children: [
+      {path: 'cour', component:CourComponent},
+      {path: 'interv', component:IntervComponent},
+      { path: '',
+        redirectTo: '/dashboard',
         pathMatch: 'full'
       },
     ]
@@ -69,6 +82,9 @@ const appRoutes: Routes = [
     BlogdetailsComponent,
     BlogComponent,
     InterviewsComponent,
+    DashboardComponent,
+    IntervComponent,
+    CourComponent,
     CreateComponent,
     BlogcategoryComponent
   ],
