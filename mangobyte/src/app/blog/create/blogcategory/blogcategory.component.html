@@ -1,3 +1,8 @@
-<div *ngFor="let blgc of childBlogCategories">
-  {{blgc.name}}
-</div>
+<li *ngFor="let blgc of clevelblogs" class="list-group-item">{{BCS.BlogCategories[blgc].name}}
+    <ul class="list-group inner">
+        <app-blogcategory [childBlogCategories]="blgc"></app-blogcategory>
+    </ul>
+</li>
+<li class="list-group-item btn-primary">
+  +
+</li>

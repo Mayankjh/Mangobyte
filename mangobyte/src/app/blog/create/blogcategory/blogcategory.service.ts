@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ChangeDetectorRef } from '@angular/core';
 import { LoginService } from 'src/app/login/login.service';
 
 
@@ -6,6 +6,7 @@ import { LoginService } from 'src/app/login/login.service';
   providedIn: 'root'
 })
 export class BlogcategoryService {
+  child_elements:any=[]
   BlogCategories=[]
   constructor(private ls:LoginService) {
     this.getAllBlogCategories();
@@ -17,10 +18,17 @@ export class BlogcategoryService {
         data.forEach(element => {
           this.BlogCategories[element.url]=element;
         });
+        //console.log(this.BlogCategories, this.child_elements);
+        this.refresh();
       },
       error=>{
         console.log(error);
       }
     )
+  }
+  refresh(){
+    this.child_elements.forEach(element => {
+      element.refresh();
+    });
   }
 }

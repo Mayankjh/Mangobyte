@@ -13,9 +13,6 @@
                 <div class="input-group-append">
                 </div>
               </div>
-        
-        
-        
             </div>
         
           </div>
@@ -26,7 +23,25 @@
           <div class="card-body">
             <h5 class="card-title">Blog Categories</h5>
             <div class="card-body">
-              <app-blogcategory [childBlogCategories]="blogCategories"></app-blogcategory>
+                
+
+                <ul class="list-group">
+                    <!--li class="list-group-item">One</li>
+                    <li class="list-group-item">Two
+                        <ul class="list-group inner">
+                            <li class="list-group-item">Item 2a</li>
+                            <li class="list-group-item">Item 2b</li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">Three
+                        <ul class="list-group inner">
+                            <li class="list-group-item">Item 3a</li>
+                            <li class="list-group-item">Item 3b</li>
+                        </ul>
+                    </li-->
+                    <app-blogcategory [childBlogCategories]="blogCategories"></app-blogcategory>
+                </ul>
+              
             </div>
         
           </div>

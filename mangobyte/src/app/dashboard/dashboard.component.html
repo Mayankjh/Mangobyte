@@ -1,6 +1,6 @@
 <div class="sidebar">
         <a class="active" ><i class="fas fa-user"></i> Hi</a>
-    <ng-container  *ngFor="let nav of nav_list" >
+        <ng-container  *ngFor="let nav of nav_list" >
             <a 
                 href="javascript:void(0)"
                 [ngClass]="{'active':nav_selected==nav[0]}"
@@ -22,7 +22,6 @@
         </div>
     </div>
     <ng-container  *ngIf="nav_selected=='home'">
-                This is the tribune to tailava
-            lol
+            <app-create></app-create>
     </ng-container>
 </div>
