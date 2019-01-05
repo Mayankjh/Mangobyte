@@ -1,8 +1,8 @@
 <span *ngIf='ls.data.islogged==false' (click)='showlogin()'>
   Login
 </span>
-<span *ngIf='ls.data.islogged' (click)='showlogin()'>
-    My Profile
+<span *ngIf='ls.data.islogged'>
+  <a href="/dashboard" style="color:white">Dashboard</a>
 </span>
   
 

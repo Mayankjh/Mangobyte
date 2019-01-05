@@ -19,6 +19,9 @@ export class DashboardComponent implements OnInit {
   updatenav(nav){
     this.nav_selected=nav[0];
     this.cdr.detectChanges();
+    if (this.nav_selected= "Logout"){
+      this.ls.logout()
+    }
     //console.log(this.nav_selected, nav);
   }
   ngOnInit() {

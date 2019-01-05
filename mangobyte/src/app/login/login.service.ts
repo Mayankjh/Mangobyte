@@ -76,7 +76,11 @@ export class LoginService {
           alert('Wrong credentials were provided, please provide the correct details');
         }
       }, ()=>{
+        document.getElementById("logindiv").style.display="none";
         console.log();
+        window.location.reload();
+        alert('Login Successful');
+        
       });
   }
 
