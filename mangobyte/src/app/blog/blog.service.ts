@@ -19,7 +19,7 @@ export class BlogService {
         }
     ).subscribe(data=>{console.log(data); child.blog=data;child.refresh();}, error=>{console.log(error)});
   }
-  create_blog(name:string, cateblg_url:string,type:string ){
+  create_blog(name:string, cateblg_url:string,type:string){
     this.ls.http.post(this.ls.serverurl+'blogs/blog/',
       new HttpParams()
         .set('name', name)
@@ -32,7 +32,7 @@ export class BlogService {
             .set('Authorization', 'token '+this.ls.data.token)
         }
       ).subscribe(data=>{
-        console.log("sucess")
+        alert("Blog created successfully")
       }, error=>{
         console.log('errror')
       })

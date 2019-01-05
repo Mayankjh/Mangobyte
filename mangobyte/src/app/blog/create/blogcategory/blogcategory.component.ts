@@ -45,7 +45,8 @@ export class BlogcategoryComponent implements OnInit {
   }
   add_blog(){
     this.BCS.create_bc(this.childBlogCategories, document.getElementById(this.childBlogCategories+'_cnew_input')['value']);
-
+    document.getElementById(this.childBlogCategories+'_cnew_input')['value']='';
+    this.hide_cnew();
   
   }
 }
