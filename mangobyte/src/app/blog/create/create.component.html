@@ -9,7 +9,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text btn btn-primary">Name :</span>
             </div>
-            <input class="form-control" type="text">
+            <input class="form-control" type="text" id="createblg_name">
             
           </div><br>
 
@@ -28,9 +28,9 @@
           <div class="form-group">
               <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <label class="input-group-text btn btn-primary" for="my-input">Type</label>
+                    <label class="input-group-text btn btn-primary" for="createblg_type">Type</label>
                   </div>
-                  <select class="custom-select form-control" id="my-input">
+                  <select class="custom-select form-control" id="createblg_type">
                     <option selected>Choose...</option>
                     <option value="1">Interview</option>
                     <option value="2">Course</option>
@@ -44,7 +44,7 @@
             </select> -->
           </div>
 
-          <button class="btn btn-success">Create Blog</button>
+          <button class="btn btn-success" (click)="create_blog();">Create Blog</button>
 
         </div>
 

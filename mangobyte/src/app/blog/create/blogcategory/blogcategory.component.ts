@@ -19,6 +19,7 @@ export class BlogcategoryComponent implements OnInit {
   }
   refresh(){
     var parent=null;
+    this.clevelblogs=[];
     console.log(this.childBlogCategories);
     if(this.childBlogCategories!='root'){
       // get all the categories
@@ -36,7 +37,17 @@ export class BlogcategoryComponent implements OnInit {
     else e.style.display='none';
   }
   hide_child=true;
+  show_cnew(){
+    document.getElementById(this.childBlogCategories+'_cnew_div').style.display='block';
+  }
+  hide_cnew(){
+    document.getElementById(this.childBlogCategories+'_cnew_div').style.display='none';
+  }
+  add_blog(){
+    this.BCS.create_bc(this.childBlogCategories, document.getElementById(this.childBlogCategories+'_cnew_input')['value']);
+
   
+  }
 }
 
         

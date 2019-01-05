@@ -19,5 +19,23 @@ export class BlogService {
         }
     ).subscribe(data=>{console.log(data); child.blog=data;child.refresh();}, error=>{console.log(error)});
   }
+  create_blog(name:string, cateblg_url:string,type:string ){
+    this.ls.http.post(this.ls.serverurl+'blogs/blog/',
+      new HttpParams()
+        .set('name', name)
+        .set('creator', this.ls.user.url)
+        .set('category', cateblg_url)
+        .set('blog_type', type)
+        .set('body', '{}'),
+        {
+          headers:new HttpHeaders()
+            .set('Authorization', 'token '+this.ls.data.token)
+        }
+      ).subscribe(data=>{
+        console.log("sucess")
+      }, error=>{
+        console.log('errror')
+      })
+  }
 }
 

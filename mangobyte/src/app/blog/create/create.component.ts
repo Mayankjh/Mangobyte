@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'app-create',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class CreateComponent implements OnInit {
 
   blogCategories:string;
-  constructor() {
+  constructor(private bs:BlogService) {
     this.blogCategories='root'
   }
   selected_blc:string;
@@ -24,5 +25,11 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
     
   }
-
+  create_blog(){
+    this.bs.create_blog(
+      document.getElementById('createblg_name')['value'],
+      this.selected_blc,
+      document.getElementById('createblg_type')['value']
+    )
+  }
 }

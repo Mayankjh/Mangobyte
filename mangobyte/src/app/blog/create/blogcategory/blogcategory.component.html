@@ -9,5 +9,17 @@
     </ul>
 </li>
 <li class="list-group-item">
-    <button class="btn btn-success"><i style="font-size:15px;" class="fas fa-plus"></i></button>
+    <button class="btn btn-success" (click)="show_cnew()"><i style="font-size:15px;" class="fas fa-plus"></i></button>
 </li>
+<div 
+    id="{{this.childBlogCategories}}_cnew_div"
+    style="position:fixed; background-color: rgba(0,0,0,0.3); top:0; left:0;right: 0;bottom: 0; z-index: 4;display:none;">
+    <div class="card" style="position: absolute; top:50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="card-body">
+            <h5 class="card-title">Group Name</h5>
+            <input id="{{this.childBlogCategories}}_cnew_input" class="form-control" type="text">
+            <button class="btn btn-secondary" (click)="add_blog();">Create</button>
+            <button class="btn btn-danger" (click)="hide_cnew();">Cancle</button>
+        </div>
+    </div>
+</div>
