@@ -8,6 +8,7 @@ var $:any;
 })
 export class BlogcategoryComponent implements OnInit {
   @Input() childBlogCategories:string;
+  @Input() parent_element:any;
   private clevelblogs=[]
   constructor(private BCS:BlogcategoryService, private cdr:ChangeDetectorRef) { 
     BCS.child_elements.push(this);
@@ -27,7 +28,7 @@ export class BlogcategoryComponent implements OnInit {
         if(this.BCS.BlogCategories[cat].parent==parent)this.clevelblogs.push(cat);
     }
     this.cdr.detectChanges();
-    console.log('I was calledd')
+    console.log(this.parent_element);
   }
   toggle_child(blgc){
     var e=document.getElementById(blgc);
@@ -35,7 +36,7 @@ export class BlogcategoryComponent implements OnInit {
     else e.style.display='none';
   }
   hide_child=true;
-
+  
 }
 
         

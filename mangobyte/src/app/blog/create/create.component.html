@@ -1,50 +1,34 @@
-
 <div class="row ">
-  <div class="col-md-6">
-      <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Create Blog</h5>
-            <div class="card-body">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">Name :</span>
-                </div>
-                <input class="form-control" type="text">
-                <div class="input-group-append">
-                </div>
-              </div>
-            </div>
-        
-          </div>
-        </div>
-  </div>
-  <div class="col-md-6">
-      <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Blog Categories</h5>
-            <div class="card-body">
-                
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Create Blog</h5>
+        <div class="card-body">
 
-                <ul class="list-group">
-                    <!--li class="list-group-item">One</li>
-                    <li class="list-group-item">Two
-                        <ul class="list-group inner">
-                            <li class="list-group-item">Item 2a</li>
-                            <li class="list-group-item">Item 2b</li>
-                        </ul>
-                    </li>
-                    <li class="list-group-item">Three
-                        <ul class="list-group inner">
-                            <li class="list-group-item">Item 3a</li>
-                            <li class="list-group-item">Item 3b</li>
-                        </ul>
-                    </li-->
-                    <app-blogcategory [childBlogCategories]="blogCategories"></app-blogcategory>
-                </ul>
-              
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Name :</span>
             </div>
-        
+            <input class="form-control" type="text">
+            <div class="input-group-append">
+            </div>
           </div>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Select category</span>
+            </div>
+            <p class="form-control" id="blc-v" (click)='show_blog_categories();'></p>
+          </div>
+          <div class="card" id="blc-card" style="display:none;">
+            <ul class="list-group">
+              <app-blogcategory [childBlogCategories]="blogCategories" [parent_element]='this'></app-blogcategory>
+            </ul>
+          </div>
+
         </div>
+
+      </div>
+    </div>
   </div>
 </div>
