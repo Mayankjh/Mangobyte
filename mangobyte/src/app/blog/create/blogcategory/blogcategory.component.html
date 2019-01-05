@@ -3,7 +3,7 @@
     <span>
         {{BCS.BlogCategories[blgc].name}}
     </span>
-    <input type="radio" style="float:right;" name="shit" (click)="parent_element.selected_blog_category(BCS.BlogCategories[blgc]);">
+    <input  type="radio" style="float:right;" name="shit" (click)="parent_element.selected_blog_category(BCS.BlogCategories[blgc]);">
     <ul class="list-group inner" id="{{blgc}}" style="display: none;">
         <app-blogcategory [childBlogCategories]="blgc" [parent_element]='parent_element'></app-blogcategory>
     </ul>

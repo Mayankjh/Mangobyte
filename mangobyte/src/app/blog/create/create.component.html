@@ -2,21 +2,20 @@
   <div class="col">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Create Blog</h5>
+        <h5 class="card-title text-center">Create Blog</h5>
         <div class="card-body">
 
           <div class="input-group">
             <div class="input-group-prepend">
-              <span class="input-group-text">Name :</span>
+              <span class="input-group-text btn btn-primary">Name :</span>
             </div>
             <input class="form-control" type="text">
-            <div class="input-group-append">
-            </div>
-          </div>
+            
+          </div><br>
 
           <div class="input-group">
             <div class="input-group-prepend">
-              <span class="input-group-text">Select category</span>
+              <span class="input-group-text btn btn-primary">Select category</span>
             </div>
             <p class="form-control" id="blc-v" (click)='show_blog_categories();'></p>
           </div>
@@ -24,17 +23,28 @@
             <ul class="list-group">
               <app-blogcategory [childBlogCategories]="blogCategories" [parent_element]='this'></app-blogcategory>
             </ul>
-          </div>
+          </div><br>
 
           <div class="form-group">
-            <label for="my-input">Type</label>
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text btn btn-primary" for="my-input">Type</label>
+                  </div>
+                  <select class="custom-select form-control" id="my-input">
+                    <option selected>Choose...</option>
+                    <option value="1">Interview</option>
+                    <option value="2">Course</option>
+                   
+                  </select>
+                </div>
+            <!-- <label for="my-input">Type</label>
             <select id="my-input" class="form-control">
               <option value="1">Interview</option>
               <option value="2">Course</option>
-            </select>
+            </select> -->
           </div>
 
-          <button class="btn btn-secondary">Create Blog</button>
+          <button class="btn btn-success">Create Blog</button>
 
         </div>
 
