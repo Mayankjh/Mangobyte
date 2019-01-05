@@ -1,5 +1,5 @@
 <li *ngFor="let blgc of clevelblogs" class="list-group-item">
-    <button class="btn btn-danger" (click)="toggle_child(blgc);"><i style="font-size:15px;" class="fas fa-minus"></i></button>
+    <i style="font-size:13px; background:#fc4b6c;color:#fff;border-radius:10px;padding: 5px;" (click)="toggle_child(blgc);" class="fas fa-minus"></i>
     <span>
         {{BCS.BlogCategories[blgc].name}}
     </span>
