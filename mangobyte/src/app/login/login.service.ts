@@ -117,4 +117,9 @@ export class LoginService {
         }
       });
   }
+  public getHeaders(){
+    if(this.data.islogged)
+    return new HttpHeaders().set("Authorization", "Token "+ this.data.token);
+    else return new HttpHeaders();
+  }
 }

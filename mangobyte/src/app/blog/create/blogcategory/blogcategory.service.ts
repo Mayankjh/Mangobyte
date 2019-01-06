@@ -7,7 +7,7 @@ import { HttpParams, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class BlogcategoryService {
-  child_elements:any=[]
+  public child_elements:any=[]
   BlogCategories=[]
   constructor(private ls:LoginService) {
     this.getAllBlogCategories();

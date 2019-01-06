@@ -3,17 +3,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './nav/home/home.component';
+import { AboutComponent } from './nav/about/about.component';
 import { CoursesComponent } from './courses/courses.component';
 import { EntreprComponent } from './courses/components/entrepr/entrepr.component';
 import { AcadComponent } from './courses/components/acad/acad.component';
 import { PublicComponent } from './courses/components/public/public.component';
 import { CorporateComponent } from './courses/components/corporate/corporate.component';
 import { PoliticsComponent } from './courses/components/politics/politics.component';
-import { MentorsComponent } from './mentors/mentors.component';
-import { ContactComponent } from './contact/contact.component';
-import { DetailsComponent } from './courses/components/details/details.component';
+import { MentorsComponent } from './nav/mentors/mentors.component';
+import { ContactComponent } from './nav/contact/contact.component';
+import { DetailsComponent } from './nav/details/details.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
@@ -21,21 +21,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { BlogdetailsComponent } from './courses/components/blogdetails/blogdetails.component';
 import { BlogComponent } from './blog/blog.component';
 import {BlogcategoryComponent} from './blog/create/blogcategory/blogcategory.component';
-import { InterviewsComponent } from './courses/components/interviews/interviews.component';
+import { InterviewsComponent } from './nav/interviews/interviews.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IntervComponent } from './dashboard/components/interv/interv.component';
 import { CourComponent } from './dashboard/components/cour/cour.component';
-import { CreateComponent } from './blog/create/create.component'
+import { CreateComponent } from './blog/create/create.component';
+import { PreviewdisplayerComponent } from './nav/previewdisplayer/previewdisplayer.component'
 
 const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent, pathMatch: 'full' },
-  { path: 'about', component: AboutComponent },
-  { path: 'mentors', component: MentorsComponent },
-  { path: 'contact', component: ContactComponent },
+  {path:'', component: NavComponent},
   { path: 'courses', component: CoursesComponent,
     children: [
       {path: 'details', component:DetailsComponent},
-      {path: 'interviews', component:InterviewsComponent},
       {path: 'entrepreneurship', component:EntreprComponent},
       {path: 'academia', component:AcadComponent},
       {path: 'public', component:PublicComponent},
@@ -43,7 +40,7 @@ const appRoutes: Routes = [
       {path: 'politics', component:PoliticsComponent},
       {path: 'blogdetails', component:BlogdetailsComponent},
       { path: '',
-        redirectTo: '/courses/details',
+        redirectTo: './details',
         pathMatch: 'full'
       },
     ]
@@ -57,8 +54,7 @@ const appRoutes: Routes = [
         pathMatch: 'full'
       },
     ]
-  },      
-  {path:'', redirectTo:'/home', pathMatch:'full' }
+  }
   
 ];
 
@@ -86,7 +82,8 @@ const appRoutes: Routes = [
     IntervComponent,
     CourComponent,
     CreateComponent,
-    BlogcategoryComponent
+    BlogcategoryComponent,
+    PreviewdisplayerComponent
   ],
   imports: [
     BrowserModule,

@@ -6,16 +6,28 @@ import { HttpBackend, HttpHeaders, HttpParams } from '@angular/common/http';
 })
 export class BlogService {
   public child;
+  public child_elements:any=[];
   constructor(private ls:LoginService) {
     // check the existing permissions of the user regarding this blog
-  
+
+  }
+  public allBlogs:any;
+  getAllBlogs(){
+    this.ls.http.get(this.ls.serverurl+"blogs/blog/",
+        {
+          headers: this.ls.getHeaders()
+        }
+    ).subscribe(data=>{
+      /*console.log(data); */
+      this.allBlogs=data;
+      this.refresh();
+    }, error=>{console.log(error)});
   }
   getblog(no, child){
     console.log(this.ls.data.token);
     this.ls.http.get(this.ls.serverurl+"blogs/blog/"+no+"/",
         {
-          headers: new HttpHeaders()
-          .set('Authorization', 'Token '+this.ls.data.token)
+          headers: this.ls.getHeaders()
         }
     ).subscribe(data=>{console.log(data); child.blog=data;child.refresh();}, error=>{console.log(error)});
   }
@@ -28,14 +40,18 @@ export class BlogService {
         .set('blog_type', type)
         .set('body', '{}'),
         {
-          headers:new HttpHeaders()
-            .set('Authorization', 'token '+this.ls.data.token)
+          headers:this.ls.getHeaders()
         }
       ).subscribe(data=>{
         alert("Blog created successfully")
       }, error=>{
         console.log('errror')
       })
+  }
+  refresh(){
+    this.child_elements.forEach(element => {
+      element.refresh();
+    });
   }
 }
 
