@@ -1,0 +1,9 @@
+<div *ngFor="let gl of group_list">
+    <!-- If no body then show child categories -->
+    <!-- Else show category preview -->
+    {{ BCS.BlogCategories[gl].body }}
+</div>
+<div *ngFor="let blog of blog_list">
+    <!-- Finally show child blog previews -->
+    {{blog}}
+</div>
