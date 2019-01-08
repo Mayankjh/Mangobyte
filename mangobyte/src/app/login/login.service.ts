@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
+
 //var $:any;
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,12 @@ export class LoginService {
       islogged:false,
       token:''
     }
-    // this.serverurl = "http://localhost:8000/";
+    this.serverurl = "http://localhost:8000/";
     var token = localStorage.getItem('auth_token');
     if(token==null){
       // user not logged
+      // _tell child elements to get their body content
+      
       
     } else {
       // user can be logged
@@ -49,6 +52,8 @@ export class LoginService {
           token:''
         }
         localStorage.removeItem('auth_token');
+    }, ()=>{
+      
     })
   }
   login(username:string, password:string){
@@ -68,8 +73,10 @@ export class LoginService {
           this.data.token = data['token'];
           this.data.islogged=true;
           localStorage.setItem('auth_token', this.data.token);
+          this.check_user();
         } 
         this.child.refresh();
+        this.refresh();
       }, (error)=>{
         if(error.status==400 || 404){
           // failure
@@ -77,9 +84,9 @@ export class LoginService {
         }
       }, ()=>{
         document.getElementById("logindiv").style.display="none";
-        console.log();
-        window.location.reload();
-        alert('Login Successful');
+        this.refresh();
+        //window.location.reload();
+        //alert('Login Successful');
         
       });
   }
@@ -121,5 +128,18 @@ export class LoginService {
     if(this.data.islogged)
     return new HttpHeaders().set("Authorization", "Token "+ this.data.token);
     else return new HttpHeaders();
+  }
+
+  //refresh childs
+  child_elements=[];
+  refresh(){
+    for(let x in this.child_elements){
+      this.child_elements[x].refresh();
+    }
+  }
+  addChild(x:any){
+    if(this.child_elements.indexOf(x)==-1){
+      this.child_elements.push(x);
+    }
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LoginService } from '../login/login.service';
+import { BlogcategoryService } from '../blog/create/blogcategory/blogcategory.service';
+import { BlogService } from '../blog/blog.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +10,11 @@ import { LoginService } from '../login/login.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private ls:LoginService, private cdr:ChangeDetectorRef) { }
+  constructor(private ls:LoginService, private BCS:BlogcategoryService, private BS:BlogService, private cdr:ChangeDetectorRef) { }
   nav_list=[
     ["Home", "home"],
-    ["Interviews", "chalkboard-teacher"],
-    ["Courses", "user-graduate"],
+    ["Edit a bog", ""],
+    ["Edit a blog category", ""],
     ["Logout", "power-off"]  
   ]
   nav_selected=this.nav_list[0][0]
@@ -20,11 +22,46 @@ export class DashboardComponent implements OnInit {
     this.nav_selected=nav[0];
     this.cdr.detectChanges();
     if (this.nav_selected=="Logout"){
-      this.ls.logout()
+      this.ls.logout();
+      
     }
     //console.log(this.nav_selected, nav);
   }
+  selected_blc:any;
+  public selected_blog_category(value){
+    //document.getElementById('blc-card').style.display='none';
+    this.selected_blc = value.url;
+    this.cdr.detectChanges();
+    document.getElementById("bce_image_prev").style.backgroundImage='url('+this.BCS.BlogCategories[this.selected_blc].body.image+')';
+
+  }
+  update_bc(){
+    // get all the elements
+    var url = this.selected_blc, img = document.getElementById('bce_image').innerText, name = document.getElementById('bce_name').innerText,
+      title = document.getElementById('bce_title').innerText, disc = document.getElementById('bce_desc').innerText,
+      body = JSON.stringify({
+        title:title,
+        image:img,
+        disc:disc
+      })
+      this.BCS.update_bc(this.selected_blc, name, body).subscribe(data=>{
+        console.log(data);
+        this.BCS.getAllBlogCategories();
+        
+      }, error=>{
+        console.log(error)
+      });
+
+  }
+  delete_bc(){
+    console.log(this.selected_blc);
+    this.BCS.delete_bc(this.selected_blc);
+    this.BCS.getAllBlogCategories();
+  }
   ngOnInit() {
+    if(this.ls.data.islogged==false){
+      console.log(this.ls.child_elements);
+    }
     console.log()
   }
 

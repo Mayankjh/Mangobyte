@@ -26,7 +26,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { IntervComponent } from './dashboard/components/interv/interv.component';
 import { CourComponent } from './dashboard/components/cour/cour.component';
 import { CreateComponent } from './blog/create/create.component';
-import { PreviewdisplayerComponent } from './nav/previewdisplayer/previewdisplayer.component'
+import { PreviewdisplayerComponent } from './nav/previewdisplayer/previewdisplayer.component';
+import { EditbcComponent } from './nav/previewdisplayer/editbc/editbc.component'
 
 const appRoutes: Routes = [
   {path:'', component: NavComponent},
@@ -83,7 +84,8 @@ const appRoutes: Routes = [
     CourComponent,
     CreateComponent,
     BlogcategoryComponent,
-    PreviewdisplayerComponent
+    PreviewdisplayerComponent,
+    EditbcComponent
   ],
   imports: [
     BrowserModule,

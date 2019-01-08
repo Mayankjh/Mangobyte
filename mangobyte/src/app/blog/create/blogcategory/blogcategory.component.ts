@@ -20,7 +20,7 @@ export class BlogcategoryComponent implements OnInit {
   refresh(){
     var parent=null;
     this.clevelblogs=[];
-    console.log(this.childBlogCategories);
+    //console.log(this.childBlogCategories);
     if(this.childBlogCategories!='root'){
       // get all the categories
       parent=this.childBlogCategories;
@@ -28,8 +28,8 @@ export class BlogcategoryComponent implements OnInit {
     for(var cat in this.BCS.BlogCategories){
         if(this.BCS.BlogCategories[cat].parent==parent)this.clevelblogs.push(cat);
     }
-    this.cdr.detectChanges();
-    console.log(this.parent_element);
+    //this.cdr.detectChanges();
+    //console.log(this.parent_element);
   }
   toggle_child(blgc){
     var e=document.getElementById(blgc);

@@ -24,8 +24,40 @@
     <ng-container  *ngIf="nav_selected=='Home'">
             <app-create ></app-create>
     </ng-container>
-    <ng-container  *ngIf="nav_selected=='Interviews'">
-           <app-interv></app-interv>
+    <ng-container  *ngIf="nav_selected=='Edit a blog category'">
+            <div class="card" id="blc-card" >
+                    <ul class="list-group">
+                      <app-blogcategory [childBlogCategories]="blogCategories" [parent_element]='this'></app-blogcategory>
+                    </ul>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <section class="ftco-section">
+                            <div class="container">
+                              <div class="row">
+                                  <ng-container *ngIf="selected_blc!=null">
+                                        <div class="">
+                                                <div class="course align-self-stretch">
+                                                  <a  class="img" id="bce_image_prev"></a>
+                                                  <small><p contenteditable="true" id="bce_image">{{ this.BCS.BlogCategories[selected_blc].body.image }}</p></small>
+                                                  <div class="text p-4">
+                                                    <p class="category"><span contenteditable="true" id="bce_name">{{ this.BCS.BlogCategories[selected_blc].name }}</span><span class="price"> </span></p>
+                                                    <h3 class="mb-3"><a contenteditable="true" id="bce_title">{{this.BCS.BlogCategories[selected_blc].body.title}}</a></h3>
+                                                    <p id="bce_desc" contenteditable="true">{{ this.BCS.BlogCategories[selected_blc].body.disc }}</p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            
+                                  </ng-container>
+                               </div>
+                            </div>
+                    </section>                    
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-success" (click)="update_bc()">Update</button>
+                    <button class="btn btn-danger" (click)="delete_bc()">Delete</button>
+                </div>
+            </div>
 </ng-container>
 <ng-container  *ngIf="nav_selected=='Courses'">
      <app-cour></app-cour>

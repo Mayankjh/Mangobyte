@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { BlogcategoryService } from 'src/app/blog/create/blogcategory/blogcategory.service';
 import { BlogService } from 'src/app/blog/blog.service';
-
+declare var $:any;
 @Component({
   selector: 'app-previewdisplayer',
   templateUrl: './previewdisplayer.component.html',
@@ -40,5 +40,6 @@ export class PreviewdisplayerComponent implements OnInit {
   ngOnInit() {
     
   }
+  
 
 }
