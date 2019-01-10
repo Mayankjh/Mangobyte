@@ -19,7 +19,7 @@ export class CreateComponent implements OnInit {
     this.selected_blc = value.url;
   }
   show_blog_categories(){
-    console.log('was asked to show')
+    //console.log('was asked to show')
     document.getElementById('blc-card').style.display='block';
   }
   ngOnInit() {
