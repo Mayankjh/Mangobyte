@@ -1,65 +1,83 @@
-<div class="sidebar">
-        <a style="background:#fc4b6c;color:white;" ><i class="fas fa-user"></i> Hi</a>
-    <ng-container  *ngFor="let nav of nav_list" >
-            <a 
-                href="javascript:void(0)"
-                [ngClass]="{'active':nav_selected==nav[0]}"
-                (click)="updatenav(nav);"
-                >
+<ng-container *ngIf="this.BCS.ls.data.islogged">
 
-                    <i class="fas fa-{{ nav[1] }}"></i> 
-                    {{ nav[0] }}
-            </a>
+
+<div class="sidebar">
+    <a style="background:#fc4b6c;color:white;"><i class="fas fa-user"></i> Hi {{this.BCS.ls.user.username}}</a>
+    <ng-container *ngFor="let nav of nav_list">
+        <a href="javascript:void(0)" [ngClass]="{'active':nav_selected==nav[0]}" (click)="updatenav(nav);">
+
+            <i class="fas fa-{{ nav[1] }}"></i>
+            {{ nav[0] }}
+        </a>
     </ng-container>
-    </div>
+</div>
 <div class="content">
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
             <h3 class="text-themecolor">Welcome to Dashboard</h3>
         </div>
         <div class="col-md-7 col-4 align-self-center">
-            <a style="border-radius:4px;background:#fc4b6c;color:white;float:right;" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" href="/home"><i class="fa fa-reply" aria-hidden="true"></i> Return To Website</a>
+            <a style="border-radius:4px;background:#fc4b6c;color:white;float:right;" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"
+                href="/"><i class="fa fa-reply" aria-hidden="true"></i> Return To Website</a>
         </div>
     </div>
-    <ng-container  *ngIf="nav_selected=='Home'">
-            <app-create ></app-create>
+    <ng-container *ngIf="nav_selected=='Home'">
+        <app-create></app-create>
     </ng-container>
-    <ng-container  *ngIf="nav_selected=='Edit a blog category'">
-            <div class="card" id="blc-card" >
-                    <ul class="list-group">
-                      <app-blogcategory [childBlogCategories]="blogCategories" [parent_element]='this'></app-blogcategory>
-                    </ul>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <section class="ftco-section">
-                            <div class="container">
-                              <div class="row">
-                                  <ng-container *ngIf="selected_blc!=null">
-                                        <div class="">
-                                                <div class="course align-self-stretch">
-                                                  <a  class="img" id="bce_image_prev"></a>
-                                                  <small><p contenteditable="true" id="bce_image">{{ this.BCS.BlogCategories[selected_blc].body.image }}</p></small>
-                                                  <div class="text p-4">
-                                                    <p class="category"><span contenteditable="true" id="bce_name">{{ this.BCS.BlogCategories[selected_blc].name }}</span><span class="price"> </span></p>
-                                                    <h3 class="mb-3"><a contenteditable="true" id="bce_title">{{this.BCS.BlogCategories[selected_blc].body.title}}</a></h3>
-                                                    <p id="bce_desc" contenteditable="true">{{ this.BCS.BlogCategories[selected_blc].body.disc }}</p>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            
-                                  </ng-container>
-                               </div>
+    <ng-container *ngIf="nav_selected=='Edit a blog category'">
+        <div class="card" id="blc-card">
+            <ul class="list-group">
+                <app-blogcategory [childBlogCategories]="'root'" [parent_element]='this'></app-blogcategory>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                    <ng-container *ngIf="selected_blc!=null">
+                        <div class="">
+                            <div class="course align-self-stretch">
+                                <a class="img" id="bce_image_prev"></a>
+                                <small>
+                                    <p contenteditable="true" id="bce_image">{{
+                                        this.BCS.BlogCategories[selected_blc].body.image }}</p>
+                                </small>
+                                <div class="text p-4">
+                                    <p class="category"><span contenteditable="true" id="bce_name">{{
+                                            this.BCS.BlogCategories[selected_blc].name }}</span><span class="price">
+                                        </span></p>
+                                    <h3 class="mb-3"><a contenteditable="true" id="bce_title">{{this.BCS.BlogCategories[selected_blc].body.title}}</a></h3>
+                                    <p id="bce_desc" contenteditable="true">{{
+                                        this.BCS.BlogCategories[selected_blc].body.disc }}</p>
+                                </div>
                             </div>
-                    </section>                    
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-success" (click)="update_bc()">Update</button>
-                    <button class="btn btn-danger" (click)="delete_bc()">Delete</button>
-                </div>
+                        </div>
+
+                    </ng-container>
+                
             </div>
+            <div class="card-footer">
+                <button class="btn btn-success" (click)="update_bc()">Update</button>
+                <button class="btn btn-danger" (click)="delete_bc()">Delete</button>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="nav_selected=='Courses'">
+        <app-cour></app-cour>
+    </ng-container>
+</div>
 </ng-container>
-<ng-container  *ngIf="nav_selected=='Courses'">
-     <app-cour></app-cour>
-</ng-container>
+<div class="card" *ngIf="!this.BCS.ls.data.islogged">
+    <div class="card-header">
+        Login Required
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Only authorized persons can proceed further</h5>
+        <p class="card-text">
+            This area is for website admins only, if you are an admin please login with the provided
+            username and password below
+        </p>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-dark" type="button"><app-login></app-login></button>
+        <a class="btn btn-dark" href="/">Go home symon</a>
+    </div>
 </div>

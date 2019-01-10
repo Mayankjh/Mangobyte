@@ -10,7 +10,9 @@ import { BlogService } from '../blog/blog.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private ls:LoginService, private BCS:BlogcategoryService, private BS:BlogService, private cdr:ChangeDetectorRef) { }
+  constructor(private ls:LoginService, private BCS:BlogcategoryService, private BS:BlogService, private cdr:ChangeDetectorRef) {
+    this.BCS.child_elements.push(this);
+   }
   nav_list=[
     ["Home", "home"],
     ["Edit a bog", ""],
@@ -56,13 +58,18 @@ export class DashboardComponent implements OnInit {
   delete_bc(){
     console.log(this.selected_blc);
     this.BCS.delete_bc(this.selected_blc);
-    this.BCS.getAllBlogCategories();
+    this.selected_blc=null;
+    //window.location.reload();
   }
   ngOnInit() {
     if(this.ls.data.islogged==false){
       console.log(this.ls.child_elements);
     }
     console.log()
+  }
+  refresh(){
+    console.log('I was caslled')
+    this.cdr.detectChanges();
   }
 
 }

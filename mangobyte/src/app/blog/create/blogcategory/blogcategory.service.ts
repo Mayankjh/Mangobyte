@@ -8,11 +8,13 @@ import { HttpParams, HttpHeaders } from '@angular/common/http';
 })
 export class BlogcategoryService {
   public child_elements: any = []
-  BlogCategories = []
+  BlogCategories : any;
   constructor(private ls: LoginService) {
     this.getAllBlogCategories();
   }
   getAllBlogCategories() {
+    console.log("Get all blg cat called", this.BlogCategories)
+    this.BlogCategories={}
     this.ls.http.get(this.ls.serverurl + 'blogs/blogcategory/').subscribe(
       (data: any) => {
         //console.log(data);
@@ -26,6 +28,9 @@ export class BlogcategoryService {
       },
       error => {
         console.log(error);
+      },
+      ()=>{
+        console.log("Get all blg cat final", this.BlogCategories)
       }
     )
   }
@@ -42,7 +47,7 @@ export class BlogcategoryService {
         .set('name', child_name)
         .set('parent', parent_url)
         .set('creator', this.ls.user.url)
-        .set('body', "nothing")//'{"title":"Title of description","image":"../assets/images/course-5.jpg","disc":"Body Of description"}')
+        .set('body', '{"title":"Title of description","image":"../assets/images/course-5.jpg","disc":"Body Of description"}')
       ,
       {
         headers: new HttpHeaders()
@@ -52,7 +57,7 @@ export class BlogcategoryService {
       //console.log(data);
       this.getAllBlogCategories();
     }, error => {
-
+      console.log(error);
     });
   }
   update_bc(url: string, name: string, body: string) {
@@ -62,7 +67,7 @@ export class BlogcategoryService {
   }
   delete_bc(url: string) {
     // delete child blogcategories
-    console.log(this.BlogCategories);
+    //console.log(this.BlogCategories);
     let to_del = []
     for (let x in this.BlogCategories) {
       if (this.BlogCategories[x].parent == url) {
@@ -87,6 +92,7 @@ export class BlogcategoryService {
         }
       );
     });
+    this.getAllBlogCategories();
 
   }
 }

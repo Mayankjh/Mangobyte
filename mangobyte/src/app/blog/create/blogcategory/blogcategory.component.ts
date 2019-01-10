@@ -7,7 +7,7 @@ var $:any;
   styleUrls: ['./blogcategory.component.scss']
 })
 export class BlogcategoryComponent implements OnInit {
-  @Input() childBlogCategories:string;
+  @Input() childBlogCategories:string='';
   @Input() parent_element:any;
   private clevelblogs=[]
   constructor(private BCS:BlogcategoryService, private cdr:ChangeDetectorRef) { 
@@ -21,6 +21,7 @@ export class BlogcategoryComponent implements OnInit {
     var parent=null;
     this.clevelblogs=[];
     //console.log(this.childBlogCategories);
+    if(this.childBlogCategories==undefined || this.childBlogCategories=='') this.childBlogCategories='root';
     if(this.childBlogCategories!='root'){
       // get all the categories
       parent=this.childBlogCategories;
@@ -38,6 +39,8 @@ export class BlogcategoryComponent implements OnInit {
   }
   hide_child=true;
   show_cnew(){
+    if(this.childBlogCategories==undefined)this.childBlogCategories='';
+
     document.getElementById(this.childBlogCategories+'_cnew_div').style.display='block';
   }
   hide_cnew(){
@@ -47,7 +50,7 @@ export class BlogcategoryComponent implements OnInit {
     this.BCS.create_bc(this.childBlogCategories, document.getElementById(this.childBlogCategories+'_cnew_input')['value']);
     document.getElementById(this.childBlogCategories+'_cnew_input')['value']='';
     this.hide_cnew();
-  
+    
   }
 }
 
