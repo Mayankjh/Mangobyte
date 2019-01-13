@@ -31,6 +31,7 @@ import { EditbcComponent } from './nav/previewdisplayer/editbc/editbc.component'
 
 const appRoutes: Routes = [
   {path:'', component: NavComponent},
+  {path:'home', component: HomeComponent},
   { path: 'courses', component: CoursesComponent,
     children: [
       {path: 'details', component:DetailsComponent},
@@ -41,7 +42,7 @@ const appRoutes: Routes = [
       {path: 'politics', component:PoliticsComponent},
       {path: 'blogdetails', component:BlogdetailsComponent},
       { path: '',
-        redirectTo: './details',
+        redirectTo: 'home',
         pathMatch: 'full'
       },
     ]
