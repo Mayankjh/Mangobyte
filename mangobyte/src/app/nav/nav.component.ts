@@ -25,7 +25,7 @@ export class NavComponent {
     this.ngAfterViewInit();
     this.cdr.detectChanges();
   }
-  ngAfterViewInit() {
+  ngAfterViewInit(){
     if(this.nav_selected=="Interviews"){
       document.getElementById("banner_big").innerText="Interviews";
       document.getElementById("banner_small").innerText="";

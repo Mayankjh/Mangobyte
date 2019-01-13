@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { BlogcategoryService } from 'src/app/blog/create/blogcategory/blogcategory.service';
 import { BlogService } from 'src/app/blog/blog.service';
+import { LoginService } from 'src/app/login/login.service';
 declare var $:any;
 @Component({
   selector: 'app-previewdisplayer',
@@ -11,7 +12,8 @@ export class PreviewdisplayerComponent implements OnInit {
   @Input() parent_bc:string;
   group_list=[]
   blog_list=[]
-  constructor(private BCS:BlogcategoryService, private BLS:BlogService, private cdr:ChangeDetectorRef) { 
+  constructor(private BCS:BlogcategoryService, 
+    private BLS:BlogService,private LS:LoginService, private cdr:ChangeDetectorRef) { 
     BCS.addChild(this);
     BLS.addChild(this);
     if(this.BLS.allBlogs==null){
@@ -19,6 +21,7 @@ export class PreviewdisplayerComponent implements OnInit {
     }
     
   }
+  editable=false
   refresh(){
     //console.clear();
     //console.log(this.parent_bc, this.BCS.BlogCategories);
@@ -30,6 +33,7 @@ export class PreviewdisplayerComponent implements OnInit {
     }
     //console.log(this.parent_bc, this.BLS.allBlogs);
     //console.log(this.parent_bc, "@@@@@@@@@@@@@@@")
+    this.blog_list=[];
     for(var x in this.BLS.allBlogs){
       if(this.BLS.allBlogs[x].category==this.parent_bc)
       {
@@ -53,6 +57,20 @@ export class PreviewdisplayerComponent implements OnInit {
   ngAfterViewInit() {
     $.getScript('../assets/js/main.js');
   }
-  
+  update_blog(url, name, date, username, media_url, disc){
+    if(media_url.indexOf("https://drive.google.com/file/d/")!=-1){
+      // drive image
+      media_url="https://drive.google.com/uc?export=view&id="+media_url.split("/")[5];
+      }
+    this.editable=false;
+    this.BLS.update_blog(url, name, JSON.stringify(
+      {
+        date:date,
+        username:username,
+        media_url:media_url,
+        disc:disc
+      }
+    ))
+  }
 
 }

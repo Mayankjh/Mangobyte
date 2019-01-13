@@ -18,6 +18,11 @@ export class BlogService {
     ).subscribe(data=>{
       /*console.log(data); */
       this.allBlogs=data;
+      for(let x of this.allBlogs){
+        if(x.body.disc==undefined){
+          x.body=JSON.parse(x.body);
+        }
+      }
       this.refresh();
     }, error=>{console.log(error)});
   }
@@ -45,6 +50,17 @@ export class BlogService {
       }, error=>{
         console.log('errror')
       })
+  }
+  update_blog(url, name, body){
+    this.ls.http.patch(url, new HttpParams()
+              .set('name', name)
+              .set('body', body),
+              {headers:this.ls.getHeaders()}
+    ).subscribe(data=>{
+      this.getAllBlogs();
+    }, error=>{
+      console.log(error)
+    })
   }
   child_elements=[];
   refresh(){
