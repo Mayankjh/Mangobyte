@@ -1,6 +1,8 @@
-<div *ngFor="let blog of blog_list">
-  <!-- Finally show child blog previews -->
-  <div class="col-md-4 d-flex ftco-animate">
+<div *ngFor="let blog of blog_list" class="col-md-4 d-flex ftco-animate">
+  <!-- Finally show child blog previews 
+  {{this.BLS.allBlogs[blog].name}}
+  {{this.BLS.allBlogs[blog].body}}
+  <div class="col-md-4 d-flex ftco-animate">-->
       <div class="blog-entry align-self-stretch">
         <a href="blog-single.html" class="block-20" style="background-image: url('assets/images/image_1.jpg');">
         </a>
@@ -14,16 +16,12 @@
           <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
         </div>
       </div>
-    </div>
-  {{this.BLS.allBlogs[blog].name}}
-  {{this.BLS.allBlogs[blog].body}}
-
 </div>
 
+<ng-container *ngIf="group_list.length!=0">
 <section class="ftco-section bg-light">
   <div class="container">
     <div class="row">
-      <ng-container *ngIf="group_list.length!=0">
         <ng-container *ngFor="let gl of group_list">
           <ng-container *ngIf="this.BCS.BlogCategories[gl].body.disc!=''">
             <div class="col-md-4 d-flex">
@@ -39,18 +37,13 @@
             </div>
           </ng-container>
           <ng-container *ngIf="this.BCS.BlogCategories[gl].body.disc==''">
-
-                    <div class="row justify-content-center mb-5 pb-3">
-                      <div class="col-md-7 heading-section ftco-animate text-center">
+                      <div class="col-md-12 heading-section ftco-animate text-center">
                         <h2 class="mb-4">{{this.BCS.BlogCategories[gl].name}}</h2>
-                      </div>
-                    </div>
-                    <div class="row d-flex">
                         <app-previewdisplayer [parent_bc]="gl"></app-previewdisplayer>
-                    </div>
+                      </div>                   
           </ng-container>         
         </ng-container>
-      </ng-container>
     </div>
   </div>
 </section>
+</ng-container>
