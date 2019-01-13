@@ -3182,8 +3182,6 @@ input[type="button"].btn-block {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem; }
-  .nav-link:hover, .nav-link:focus {
-    text-decoration: none; }
   .nav-link.disabled {
     color: #6c757d; }
 
@@ -3275,8 +3273,6 @@ input[type="button"].btn-block {
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap; }
-  .navbar-brand:hover, .navbar-brand:focus {
-    text-decoration: none; }
 
 .navbar-nav {
   display: -webkit-box;
