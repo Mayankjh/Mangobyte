@@ -28,20 +28,35 @@
   <div *ngIf="nav_selected=='About'" class="nav-link">
     <app-about></app-about>
   </div>
-  <div *ngIf="nav_selected=='Interviews'"class="nav-link">
-    
+  <div *ngIf="nav_selected=='Interviews'" class="nav-link">
+
   </div>
   <div *ngIf="nav_selected=='Mentorship'">
     <app-mentors></app-mentors>
   </div>
   <div *ngIf="nav_selected=='Contact'">
-      <app-contact></app-contact>
+    <app-contact></app-contact>
   </div>
-  <div *ngIf="nav_selected=='Interviews'">
+  <ng-container *ngIf="nav_selected=='Interviews' || nav_selected=='Courses'">
+      <div class="hero-wrap hero-wrap-2" style="background-image: url('../../../assets/images/bg_2.jpg'); background-attachment:fixed;">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+            <div class="col-md-8 ftco-animate text-center">
+              <p class="breadcrumbs">
+                <span id="banner_small">Interview/Courses</span>
+              </p>
+              <h1 class="mb-3 bread" id="banner_big">Interview/Courses</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div *ngIf="nav_selected=='Interviews'">
       <app-previewdisplayer [parent_bc]="this.LS.serverurl+'blogs/blogcategory/35/'"></app-previewdisplayer>
-  </div>
-  <div *ngIf="nav_selected=='Courses'">
+    </div>
+    <div *ngIf="nav_selected=='Courses'">
       <app-previewdisplayer [parent_bc]="this.LS.serverurl+'blogs/blogcategory/36/'"></app-previewdisplayer>
-  </div>
+    </div>
+  </ng-container>
 </main>
 <app-footer></app-footer>
