@@ -13,7 +13,7 @@
 
           $(window).load(function(){
           $(".typing").typed({
-              strings: ["Puzzled about what career to choose in life?", "Our Interview series will help you", "In knowing intricacies of different career paths !", "We are MangoPy"],    /* You can change the home section typing text from
+              strings: ["Puzzled about what career to choose in life?", "Our Interview series will help you", "In knowing intricacies of different career paths !", "We are Carrerofy"],    /* You can change the home section typing text from
   	                                                                                            here and do not use "&" use "and" */
               typeSpeed: 55
             });
