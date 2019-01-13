@@ -50,6 +50,9 @@ export class PreviewdisplayerComponent implements OnInit {
     console.log(this.parent_bc);
     this.refresh();
   }
+  ngAfterViewInit() {
+    $.getScript('../assets/js/main.js');
+  }
   
 
 }
