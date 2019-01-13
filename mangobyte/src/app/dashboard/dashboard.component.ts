@@ -15,7 +15,6 @@ export class DashboardComponent implements OnInit {
   }
   nav_list=[
     ["Home", "home"],
-    ["Edit a bog", ""],
     ["Edit a blog category", ""],
     ["Logout", "power-off"]  
   ]
@@ -40,8 +39,12 @@ export class DashboardComponent implements OnInit {
   update_bc(){
     // get all the elements
     var url = this.selected_blc, img = document.getElementById('bce_image').innerText, name = document.getElementById('bce_name').innerText,
-      title = document.getElementById('bce_title').innerText, disc = document.getElementById('bce_desc').innerText,
-      body = JSON.stringify({
+      title = document.getElementById('bce_title').innerText, disc = document.getElementById('bce_desc').innerText;
+      if(img.indexOf("https://drive.google.com/file/d/")!=-1){
+      // drive image
+      img="https://drive.google.com/uc?export=view&id="+img.split("/")[5];
+      }
+      var body = JSON.stringify({
         title:title,
         image:img,
         disc:disc
