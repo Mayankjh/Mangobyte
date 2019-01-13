@@ -34,11 +34,6 @@ export class BlogcategoryService {
       }
     )
   }
-  refresh() {
-    this.child_elements.forEach(element => {
-      element.refresh();
-    });
-  }
   create_bc(parent_url: string, child_name: string) {
 
     if (parent_url == "root" || parent_url == null) parent_url = '';
@@ -93,6 +88,16 @@ export class BlogcategoryService {
       );
     });
     this.getAllBlogCategories();
+  }
 
+  refresh(){
+    for(let x in this.child_elements){
+      this.child_elements[x].refresh();
+    }
+  }
+  addChild(x:any){
+    if(this.child_elements.indexOf(x)==-1){
+      this.child_elements.push(x);
+    }
   }
 }

@@ -6,10 +6,8 @@ import { HttpBackend, HttpHeaders, HttpParams } from '@angular/common/http';
 })
 export class BlogService {
   public child;
-  public child_elements:any=[];
   constructor(private ls:LoginService) {
     // check the existing permissions of the user regarding this blog
-
   }
   public allBlogs:any;
   getAllBlogs(){
@@ -48,10 +46,16 @@ export class BlogService {
         console.log('errror')
       })
   }
+  child_elements=[];
   refresh(){
-    this.child_elements.forEach(element => {
-      element.refresh();
-    });
+    for(let x in this.child_elements){
+      this.child_elements[x].refresh();
+    }
+  }
+  addChild(x:any){
+    if(this.child_elements.indexOf(x)==-1){
+      this.child_elements.push(x);
+    }
   }
 }
 

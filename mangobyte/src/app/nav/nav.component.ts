@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,7 +8,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private cdr:ChangeDetectorRef) { }
+  constructor(private cdr:ChangeDetectorRef, private LS:LoginService) { }
   nav_elements=[
     ["Home", "/home"],
     ["About", "/about"],

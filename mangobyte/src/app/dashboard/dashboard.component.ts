@@ -11,7 +11,7 @@ import { BlogService } from '../blog/blog.service';
 export class DashboardComponent implements OnInit {
 
   constructor(private ls:LoginService, private BCS:BlogcategoryService, private BS:BlogService, private cdr:ChangeDetectorRef) {
-    this.BCS.child_elements.push(this);
+    this.BCS.addChild(this);
   }
   nav_list=[
     ["Home", "home"],

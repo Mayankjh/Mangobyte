@@ -12,8 +12,8 @@ export class PreviewdisplayerComponent implements OnInit {
   group_list=[]
   blog_list=[]
   constructor(private BCS:BlogcategoryService, private BLS:BlogService, private cdr:ChangeDetectorRef) { 
-    BCS.child_elements.push(this);
-    BLS.child_elements.push(this);
+    BCS.addChild(this);
+    BLS.addChild(this);
     if(this.BLS.allBlogs==null){
       this.BLS.getAllBlogs();
     }
@@ -29,7 +29,7 @@ export class PreviewdisplayerComponent implements OnInit {
       }
     }
     //console.log(this.parent_bc, this.BLS.allBlogs);
-    console.log(this.parent_bc, "@@@@@@@@@@@@@@@")
+    //console.log(this.parent_bc, "@@@@@@@@@@@@@@@")
     for(var x in this.BLS.allBlogs){
       if(this.BLS.allBlogs[x].category==this.parent_bc)
       {
@@ -37,7 +37,7 @@ export class PreviewdisplayerComponent implements OnInit {
         console.log(x);
       }
     }
-    console.log(this.blog_list);
+    console.log(this.blog_list, this.group_list);
 
     this.cdr.detectChanges();
   }
@@ -47,6 +47,7 @@ export class PreviewdisplayerComponent implements OnInit {
     this.refresh();
   }
   ngOnInit() {
+    console.log(this.parent_bc);
     this.refresh();
   }
   
