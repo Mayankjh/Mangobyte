@@ -1,9 +1,9 @@
-<div *ngFor="let blog of blog_list" class="col-md-4 d-flex ftco-animate">
+<div class="col-md-12 d-flex ftco-animate">
   <!-- Finally show child blog previews 
   {{this.BLS.allBlogs[blog].name}}
   {{this.BLS.allBlogs[blog].body}}
   <div class="col-md-4 d-flex ftco-animate">-->
-      <div class="blog-entry align-self-stretch">
+      <div *ngFor="let blog of blog_list" class="blog-entry align-self-stretch col-md-4">
         <a href="blog-single.html" class="block-20" style="background-image: url('assets/images/image_1.jpg');">
         </a>
         <div class="text p-4 d-block">
