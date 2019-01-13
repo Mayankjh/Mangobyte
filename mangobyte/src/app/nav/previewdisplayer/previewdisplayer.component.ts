@@ -17,28 +17,37 @@ export class PreviewdisplayerComponent implements OnInit {
     if(this.BLS.allBlogs==null){
       this.BLS.getAllBlogs();
     }
+    
   }
   refresh(){
-    console.clear();
-    console.log('clear', this.BCS.BlogCategories);
+    //console.clear();
+    //console.log(this.parent_bc, this.BCS.BlogCategories);
     this.group_list=[];
     for(var x in this.BCS.BlogCategories){
       if(this.BCS.BlogCategories[x].parent==this.parent_bc){
         this.group_list.push(this.BCS.BlogCategories[x].url);
       }
     }
+    //console.log(this.parent_bc, this.BLS.allBlogs);
+    console.log(this.parent_bc, "@@@@@@@@@@@@@@@")
     for(var x in this.BLS.allBlogs){
       if(this.BLS.allBlogs[x].category==this.parent_bc)
-      this.blog_list.push(x);
+      {
+        this.blog_list.push(x);
+        console.log(x);
+      }
     }
     console.log(this.blog_list);
 
-    
-
     this.cdr.detectChanges();
   }
+  changeto(v){
+    //console.log(v);
+    this.parent_bc=v;
+    this.refresh();
+  }
   ngOnInit() {
-    
+    this.refresh();
   }
   
 

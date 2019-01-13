@@ -73,6 +73,7 @@ export class LoginService {
           this.data.token = data['token'];
           this.data.islogged=true;
           localStorage.setItem('auth_token', this.data.token);
+          console.log(response, localStorage.getItem('auth_token'));
           this.check_user();
         } 
         this.child.refresh();

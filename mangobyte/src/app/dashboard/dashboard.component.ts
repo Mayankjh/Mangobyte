@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private ls:LoginService, private BCS:BlogcategoryService, private BS:BlogService, private cdr:ChangeDetectorRef) {
     this.BCS.child_elements.push(this);
-   }
+  }
   nav_list=[
     ["Home", "home"],
     ["Edit a bog", ""],
@@ -71,5 +71,4 @@ export class DashboardComponent implements OnInit {
     console.log('I was caslled')
     this.cdr.detectChanges();
   }
-
 }
