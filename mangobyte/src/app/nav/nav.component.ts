@@ -17,7 +17,7 @@ export class NavComponent implements OnInit {
     ["Courses", "/courses/details"],
     ["Contact", "/contact"]
   ]
-  nav_selected='Interviews'
+  nav_selected='Home'
   sub_component=false;
   change_nav(nav){ 
     this.nav_selected=nav[0];
