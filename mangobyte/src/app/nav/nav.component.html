@@ -34,7 +34,7 @@
   <div *ngIf="nav_selected=='Contact'">
     <app-contact></app-contact>
   </div>
-  <ng-container *ngIf="nav_selected=='Interviews' || nav_selected=='Courses'">
+  <ng-container *ngIf="nav_selected=='Interviews' || nav_selected=='Courses' || nav_selected=='Blogs'">
       <div class="hero-wrap hero-wrap-2" style="background-image: url('../../../assets/images/bg_2.jpg'); background-attachment:fixed;">
         <div class="overlay"></div>
         <div class="container">
@@ -54,6 +54,9 @@
     <div *ngIf="nav_selected=='Courses'">
       <app-previewdisplayer [parent_bc]="this.LS.serverurl+'blogs/blogcategory/36/'"></app-previewdisplayer>
     </div>
+    <div *ngIf="nav_selected=='Blogs'">
+          <app-previewdisplayer [parent_bc]="this.LS.serverurl+'blogs/blogcategory/63/'"></app-previewdisplayer>
+        </div>
   </ng-container>
 </main>
 <app-footer></app-footer>

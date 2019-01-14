@@ -15,7 +15,8 @@ export class NavComponent {
     ["Interviews", "/courses/interviews"],
     ["Mentorship", "/mentors"],
     ["Courses", "/courses/details"],
-    ["Contact", "/contact"]
+    ["Blogs", ""],
+    ["Contact", "/contact"],
   ]
   nav_selected='Home'
   sub_component=false;
@@ -25,6 +26,7 @@ export class NavComponent {
     this.ngAfterViewInit();
     this.cdr.detectChanges();
     document.scrollingElement.scrollTop=0;
+    console.log(nav, this.nav_selected);
   }
   ngAfterViewInit(){
     if(this.nav_selected=="Interviews"){
