@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private ls:LoginService, private BCS:BlogcategoryService, private BS:BlogService, private cdr:ChangeDetectorRef) {
     this.BCS.addChild(this);
+    BS.addChild(this);
   }
   nav_list=[
     ["Home", ""],
@@ -60,10 +61,9 @@ export class DashboardComponent implements OnInit {
 
   }
   delete_bc(){
-    console.log(this.selected_blc);
-    this.BCS.delete_bc(this.selected_blc);
+    var url = this.selected_blc;
     this.selected_blc=null;
-    //window.location.reload();
+    this.BCS.delete_bc(url);
   }
   ngOnInit() {
     if(this.ls.data.islogged==false){

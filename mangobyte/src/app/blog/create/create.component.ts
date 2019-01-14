@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../blog.service';
+import { BlogcategoryService } from './blogcategory/blogcategory.service';
 
 @Component({
   selector: 'app-create',
@@ -9,8 +10,10 @@ import { BlogService } from '../blog.service';
 export class CreateComponent implements OnInit {
 
   blogCategories:string;
-  constructor(private bs:BlogService) {
+  constructor(private bs:BlogService, private BCS:BlogcategoryService) {
     this.blogCategories='root'
+    this.BCS.addChild(this);
+
   }
   selected_blc:string;
   public selected_blog_category(value){

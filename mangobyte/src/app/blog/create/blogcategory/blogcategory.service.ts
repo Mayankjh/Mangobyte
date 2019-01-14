@@ -60,34 +60,24 @@ export class BlogcategoryService {
       new HttpParams().set('name', name).set('body', body),
       { headers: this.ls.getHeaders() })
   }
-  delete_bc(url: string) {
+  delete_bc(url: string, fun=()=>{}) {
     // delete child blogcategories
     //console.log(this.BlogCategories);
-    let to_del = []
-    for (let x in this.BlogCategories) {
-      if (this.BlogCategories[x].parent == url) {
-        //
-        if (x != null) {
-          to_del.push(x);
-        }
-
-      }
-    }
-    //delete child blogs
-
-    //delete self
-    to_del.push(url);
-    to_del.forEach(element => {
-      this.ls.http.delete(element, { headers: this.ls.getHeaders() }).subscribe(
+      this.ls.http.delete(url, { headers: this.ls.getHeaders() }).subscribe(
         data => {
-          console.log("Blog category {" + element + "} was deleted");
+          console.log("Blog category {" + url + "} was deleted");
         },
         error => {
           console.log("Error in deleting the blog:", error);
+        },
+        ()=>{
+          //finally 
+          this.getAllBlogCategories();
+          fun();
+        
         }
       );
-    });
-    this.getAllBlogCategories();
+    
   }
 
   refresh(){

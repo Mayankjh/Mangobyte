@@ -1,7 +1,7 @@
 <li *ngFor="let blgc of clevelblogs" class="list-group-item">
     <i style="font-size:13px; background:#fc4b6c;color:#fff;border-radius:10px;padding: 5px;" (click)="toggle_child(blgc);" class="fas fa-minus"></i>
     <span>
-        {{BCS.BlogCategories[blgc].name}}
+        {{BCS.BlogCategories[blgc]?.name}}
     </span>
     <input  type="radio" style="float:right;" name="shit" (click)="parent_element.selected_blog_category(BCS.BlogCategories[blgc]);">
     <ul class="list-group inner" id="{{blgc}}" style="display: none;">
