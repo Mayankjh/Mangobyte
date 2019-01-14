@@ -7,12 +7,14 @@
         <img class="block-20" src="{{this.BLS.allBlogs[blog].body.media_url}}">
         <div class="text p-4 d-block">
           <div class="meta mb-3">
-            <div><a  [attr.contenteditable]="editable" #date>{{this.BLS.allBlogs[blog].body.date}}</a></div>
-            <div><a [attr.contenteditable]="editable" #uname>{{this.BLS.allBlogs[blog].body.username}}</a></div>
-            <div><a class="meta-chat" [attr.contenteditable]="editable" [hidden]="!editable" #med_url>{{this.BLS.allBlogs[blog].body.media_url}}</a></div>
+            <div><span [hidden]="!editable">Date:</span>
+                <a [ngClass]="{'btn btn-primary':editable}" [attr.contenteditable]="editable" #date>{{this.BLS.allBlogs[blog].body.date}}</a>
+            </div>
+            <div><span [hidden]="!editable">U Name:</span><a [ngClass]="{'btn btn-primary':editable}" [attr.contenteditable]="editable" #uname>{{this.BLS.allBlogs[blog].body.username}}</a></div>
+            <div><span [hidden]="!editable">Media:</span><a [ngClass]="{'btn btn-primary':editable}" class="meta-chat" [attr.contenteditable]="editable" [hidden]="!editable" #med_url>{{this.BLS.allBlogs[blog].body.media_url}}</a></div>
           </div>
           <h3 class="heading mt-3"><a [attr.contenteditable]="editable" #name>{{this.BLS.allBlogs[blog].name}}</a></h3>
-          <p [attr.contenteditable]="editable" #disc>{{this.BLS.allBlogs[blog].body.disc}}</p>
+          <p [ngClass]="{'btn btn-primary':editable}" [attr.contenteditable]="editable" #disc>{{this.BLS.allBlogs[blog].body.disc}}</p>
         </div>
         <button *ngIf="!editable && this.LS.data.islogged" (click)="editable=!editable" class="btn btn-danger">
           <i class="fas fa-edit"></i>

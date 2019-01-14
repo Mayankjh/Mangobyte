@@ -41,7 +41,12 @@ export class BlogService {
         .set('creator', this.ls.user.url)
         .set('category', cateblg_url)
         .set('blog_type', type)
-        .set('body', '{}'),
+        .set('body', JSON.stringify({
+          date:'10 Dec 2019',
+          username:'Admin',
+          media_url:'../assets/images/course-5.jpg',
+          disc:'This is the body of the blog'
+        })),
         {
           headers:this.ls.getHeaders()
         }
