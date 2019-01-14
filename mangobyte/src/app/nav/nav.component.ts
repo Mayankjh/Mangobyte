@@ -1,14 +1,16 @@
 import { Component, OnInit,AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { LoginService } from '../login/login.service';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent {
+export class NavComponent implements OnInit{
 
-  constructor(private cdr:ChangeDetectorRef, private LS:LoginService) { }
+  constructor(private cdr:ChangeDetectorRef, private LS:LoginService,private route:ActivatedRoute, private loc:Location) { }
   nav_elements=[
     ["Home", "/home"],
     ["About", "/about"],
@@ -27,15 +29,16 @@ export class NavComponent {
     this.cdr.detectChanges();
     document.scrollingElement.scrollTop=0;
     console.log(nav, this.nav_selected);
+    this.loc.go(nav[0]);
   }
   ngAfterViewInit(){
-    if(this.nav_selected=="Interviews"){
-      document.getElementById("banner_big").innerText="Interviews";
-      document.getElementById("banner_small").innerText="";
-    } else if(this.nav_selected=="Courses"){
-      document.getElementById("banner_big").innerText="Courses";
-      document.getElementById("banner_small").innerText="";
-    }
+    
+  }
+  ngOnInit(){
+    this.route.params.subscribe(params=>{
+      var a=params['id']
+      this.nav_selected=a=a[0].toUpperCase()+a.slice(1)
+    })
   }
 
 }

@@ -30,33 +30,6 @@ import { PreviewdisplayerComponent } from './nav/previewdisplayer/previewdisplay
 import { EditbcComponent } from './nav/previewdisplayer/editbc/editbc.component';
 
 const appRoutes: Routes = [
-  {path:'', component: NavComponent},
-  {path:'home', component: HomeComponent},
-  { path: 'courses', component: CoursesComponent,
-    children: [
-      {path: 'details', component:DetailsComponent},
-      {path: 'entrepreneurship', component:EntreprComponent},
-      {path: 'academia', component:AcadComponent},
-      {path: 'public', component:PublicComponent},
-      {path: 'corporate', component:CorporateComponent},
-      {path: 'politics', component:PoliticsComponent},
-      {path: 'blogdetails', component:BlogdetailsComponent},
-      { path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
-      },
-    ]
-  },
-  { path: 'dashboard', component: DashboardComponent,
-    children: [
-      {path: 'cour', component:CourComponent},
-      {path: 'interv', component:IntervComponent},
-      { path: '',
-        redirectTo: '/dashboard',
-        pathMatch: 'full'
-      },
-    ]
-  }
   
 ];
 
