@@ -22,7 +22,7 @@
           uname.innerText,
           med_url.innerText,
           disc.innerText
-        )">Save</button>
+        )">Save</button><br>
       </div>
 </div>
 
@@ -33,11 +33,11 @@
         <ng-container *ngFor="let gl of group_list">
           <ng-container *ngIf="this.BCS.BlogCategories[gl].body.disc!=''">
             <div class="col-md-4 d-flex">
-              <div class="course align-self-stretch">
+              <div class="course align-self-stretch" style="margin-bottom:10px;">
                 <img src="{{this.BCS.BlogCategories[gl].body.image}}" style="max-width:100%;" class="img">
                 <div class="text p-4">
                   <p class="category"><span>{{this.BCS.BlogCategories[gl].name}}</span> <span class="price"> </span></p>
-                  <h3 class="mb-3"><a href="/courses/politics">{{this.BCS.BlogCategories[gl].body.title}}</a></h3>
+                  <h3 class="mb-3"><a>{{this.BCS.BlogCategories[gl].body.title}}</a></h3>
                   <p>{{this.BCS.BlogCategories[gl].body.disc}}</p>
                   <p><a href="javascript:void(0)" (click)="changeto(gl)" class="btn btn-primary">View now!</a></p>
                 </div>
