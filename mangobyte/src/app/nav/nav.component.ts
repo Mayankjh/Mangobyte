@@ -24,6 +24,7 @@ export class NavComponent {
     window['$']('.navbar-toggler').click(); //bootstrap
     this.ngAfterViewInit();
     this.cdr.detectChanges();
+    document.scrollingElement.scrollTop=0;
   }
   ngAfterViewInit(){
     if(this.nav_selected=="Interviews"){

@@ -73,5 +73,15 @@ export class BlogService {
       this.child_elements.push(x);
     }
   }
+  deleteBlog(url){
+    this.ls.http.delete(url, {
+      headers:this.ls.getHeaders()
+    }).subscribe(
+      data=>{
+        this.getAllBlogs();
+        alert("The blog was deleted");
+      }
+    )
+  }
 }
 
