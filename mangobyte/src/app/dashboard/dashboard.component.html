@@ -18,10 +18,10 @@
         </div>
         <div class="col-md-7 col-4 align-self-center">
             <a style="border-radius:4px;background:#fc4b6c;color:white;float:right;" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"
-                href="/"><i class="fa fa-reply" aria-hidden="true"></i> Return To Website</a>
+                href="/"><i class="fa fa-reply" aria-hidden="true"></i>Website</a>
         </div>
     </div>
-    <ng-container *ngIf="nav_selected=='Home'">
+    <ng-container *ngIf="nav_selected=='Create Blog'">
         <app-create></app-create>
     </ng-container>
     <ng-container *ngIf="nav_selected=='Edit a blog category'">
@@ -63,6 +63,91 @@
     <ng-container *ngIf="nav_selected=='Courses'">
         <app-cour></app-cour>
     </ng-container>
+    <ng-container *ngIf="nav_selected=='Home'">
+        
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">New Features</li>
+                </ol>
+                <div class="accordion" id="accordionExample">
+                        <div class="card">
+                          <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Category
+                              </button>
+                            </h5>
+                          </div>
+                      
+                          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                              <ul>
+                                  <li>To create from either 'Create blog', or 'Edit a category', select a dropdown list and click on green '+' icon</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Blogs
+                              </button>
+                            </h5>
+                          </div>
+                          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                              Blogs can be created at any level in category, except the root, but make sure to follow the following procedure,
+                              <ul>
+                                  <li>In case of interviews, create blog only after 2nd level i.e. Interviews>Acedemia>Misslineous>Your_blog</li>
+                                  <li>In case of courses too, create blog only after 2nd level i.e. Courses>Acedemia>Misslineous>Your_blog</li>
+                              </ul>
+                              Make Sure to 
+                              <ul>
+                                  <li>Choose type interviews for video</li>
+                                  <li>Type courses for image background</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Bugs to be removed:
+                              </button>
+                            </h5>
+                          </div>
+                          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                              <ul>
+                                  <li>Page update after deleting blog_category</li>
+                                  <li>Sub-blog delete after deleting parent blog-category</li>
+                                  <li>Server side authentication</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+    
+            </nav>
+           
+
+
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">Note</li>
+                    <li>
+                            If you run the website for the first time after a min gap of 30 min,
+                            The website will take time to load of around 10-15 sec from server side. This is because of 
+                            using free dyno. Also the dyno has a fixed uptime limit for a month, we recommend to purchase 
+                            community/hobby dyno for production purpose, or the site may go down.
+                    </li>
+                </ol>
+            </nav>
+
+
+    </ng-container>
 </div>
 </ng-container>
 <div class="card" *ngIf="!this.BCS.ls.data.islogged">
@@ -78,6 +163,6 @@
     </div>
     <div class="card-footer">
         <button class="btn btn-dark" type="button"><app-login></app-login></button>
-        <a class="btn btn-dark" href="/">Go home symon</a>
+        <a class="btn btn-dark" href="/">Website</a>
     </div>
 </div>

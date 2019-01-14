@@ -14,7 +14,8 @@ export class DashboardComponent implements OnInit {
     this.BCS.addChild(this);
   }
   nav_list=[
-    ["Home", "home"],
+    ["Home", ""],
+    ["Create Blog", "pencil"],
     ["Edit a blog category", ""],
     ["Logout", "power-off"]  
   ]
