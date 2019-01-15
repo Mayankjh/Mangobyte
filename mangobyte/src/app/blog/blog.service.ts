@@ -9,7 +9,7 @@ export class BlogService {
   constructor(private ls:LoginService) {
     // check the existing permissions of the user regarding this blog
   }
-  public allBlogs:any;
+  public allBlogs:any=null;
   getAllBlogs(){
     this.ls.http.get(this.ls.serverurl+"blogs/blog/",
         {
@@ -32,7 +32,9 @@ export class BlogService {
         {
           headers: this.ls.getHeaders()
         }
-    ).subscribe(data=>{console.log(data); child.blog=data;child.refresh();}, error=>{console.log(error)});
+    ).subscribe(data=>{console.log(data); child.blog=data;child.refresh();}, error=>{console.log(error)}, ()=>{
+      this.refresh();
+    });
   }
   create_blog(name:string, cateblg_url:string,type:string){
     this.ls.http.post(this.ls.serverurl+'blogs/blog/',

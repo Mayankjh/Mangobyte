@@ -72,5 +72,8 @@ export class PreviewdisplayerComponent implements OnInit {
       }
     ))
   }
+  get_id_from_url(url){
+    return url.split("/")[5]
+  }
 
 }

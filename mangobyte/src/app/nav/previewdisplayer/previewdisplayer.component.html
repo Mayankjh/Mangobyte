@@ -4,7 +4,7 @@
   {{this.BLS.allBlogs[blog].body}}
   <div class="col-md-4 d-flex ftco-animate">-->
       <div *ngFor="let blog of blog_list" class="blog-entry align-self-stretch col-md-4">
-        <a [attr.href]="this.BLS.allBlogs[blog].blog_type=='3'?'/blog/'+this.BLS.allBlogs[blog].url.split(this.LS.server_url)[1]:null">
+        <a [attr.href]="this.BLS.allBlogs[blog].blog_type=='3'?'/'+get_id_from_url(this.BLS.allBlogs[blog].url):null">
         <img class="block-20" src="{{this.BLS.allBlogs[blog].body.media_url}}">
         </a>
         <div class="text p-4 d-block">

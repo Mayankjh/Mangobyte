@@ -18,7 +18,7 @@
     </div>
   </div>
 </nav>
-<main>
+<main *ngIf="!show_blog">
   <div *ngIf="nav_selected=='Home'" class="">
     <app-home></app-home>
   </div>
@@ -59,4 +59,7 @@
         </div>
   </ng-container>
 </main>
+<app-blogdetails *ngIf="show_blog" [id]="nav_selected">
+  hell to all
+</app-blogdetails>
 <app-footer></app-footer>

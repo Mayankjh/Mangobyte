@@ -5,7 +5,7 @@ import { NavComponent } from './nav/nav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path:'blog/:id', component:BlogdetailsComponent},
+  //{path:'blog/:id', component:BlogdetailsComponent},
   {path:'dashboard', component:DashboardComponent},
   {path:'', redirectTo:'about', pathMatch:'full'},
   {path:':id', component:NavComponent},
