@@ -7477,14 +7477,14 @@ h1, h2, h3, h4, h5,
     bottom: 0;
     content: '';
     opacity: .7;
-    background: #6a00ff;
+    background: #000;/* 
     background: -moz-linear-gradient(left, #6a00ff 0%, #ffd900 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, #6a00ff), color-stop(100%, #ffd900));
     background: -webkit-linear-gradient(left, #6a00ff 0%, #ffd900 100%);
     background: -o-linear-gradient(left, #6a00ff 0%, #ffd900 100%);
     background: -ms-linear-gradient(left, #6a00ff 0%, #ffd900 100%);
     background: -webkit-gradient(linear, left top, right top, from(#6a00ff), to(#ffd900));
-    background: linear-gradient(to right, #6a00ff 0%, #ffd900 100%);
+    background: linear-gradient(to right, #6a00ff 0%, #ffd900 100%); */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6a00ff', endColorstr='#ffd900', GradientType=1 ); }
 
 .slider-text {
@@ -7805,14 +7805,14 @@ h1, h2, h3, h4, h5,
     bottom: 0;
     content: '';
     opacity: .8;
-    background: #6a00ff;
-    background: -moz-linear-gradient(left, #6a00ff 0%, #ffd900 100%);
+    background: #000000;
+    /* background: -moz-linear-gradient(left, #6a00ff 0%, #ffd900 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, #6a00ff), color-stop(100%, #ffd900));
     background: -webkit-linear-gradient(left, #6a00ff 0%, #ffd900 100%);
     background: -o-linear-gradient(left, #6a00ff 0%, #ffd900 100%);
     background: -ms-linear-gradient(left, #6a00ff 0%, #ffd900 100%);
     background: -webkit-gradient(linear, left top, right top, from(#6a00ff), to(#ffd900));
-    background: linear-gradient(to right, #6a00ff 0%, #ffd900 100%);
+    background: linear-gradient(to right, #6a00ff 0%, #ffd900 100%); */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6a00ff', endColorstr='#ffd900', GradientType=1 ); }
 
 .about-video h2 {
