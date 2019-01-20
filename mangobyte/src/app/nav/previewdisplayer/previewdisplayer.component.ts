@@ -57,20 +57,18 @@ export class PreviewdisplayerComponent implements OnInit {
   ngAfterViewInit() {
     $.getScript('../assets/js/main.js');
   }
-  update_blog(url, name, date, username, media_url, disc){
+  update_blog(blog, name, date, username, media_url, disc){
     if(media_url.indexOf("https://drive.google.com/file/d/")!=-1){
       // drive image
       media_url="https://drive.google.com/uc?export=view&id="+media_url.split("/")[5];
       }
+      var body = blog.body;
+      body.date = date;
+      body.username = username;
+      body.media_url = media_url;
+      body.disc = disc;
     this.editable=false;
-    this.BLS.update_blog(url, name, JSON.stringify(
-      {
-        date:date,
-        username:username,
-        media_url:media_url,
-        disc:disc
-      }
-    ))
+    this.BLS.update_blog(blog.url, name, JSON.stringify(body))
   }
   get_id_from_url(url){
     return url.split("/")[5]

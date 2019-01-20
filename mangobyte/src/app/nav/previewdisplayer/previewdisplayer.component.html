@@ -1,6 +1,6 @@
 <div class="row col-md-12 d-flex ftco-animate">
       <div *ngFor="let blog of blog_list" class="blog-entry align-self-stretch col-md-4">
-        <a [attr.href]="this.BLS.allBlogs[blog].blog_type=='3'?'/'+get_id_from_url(this.BLS.allBlogs[blog].url):null">
+        <a [attr.href]="this.BLS.allBlogs[blog].blog_type!='2'?'/'+get_id_from_url(this.BLS.allBlogs[blog].url):null">
         <img class="block-20" src="{{this.BLS.allBlogs[blog].body.media_url}}">
         </a>
         <div class="text p-4 d-block">
@@ -18,7 +18,7 @@
           <i class="fas fa-edit"></i>
         </button>
         <button *ngIf="editable" class="btn btn-success" (click)="update_blog(
-          this.BLS.allBlogs[blog].url,
+          this.BLS.allBlogs[blog],
           name.innerText,
           date.innerText,
           uname.innerText,
