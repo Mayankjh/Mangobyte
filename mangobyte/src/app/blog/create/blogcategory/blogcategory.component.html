@@ -1,0 +1,27 @@
+<li *ngFor="let blgc of clevelblogs" class="list-group-item">
+    <i style="font-size:13px; background:#fc4b6c;color:#fff;border-radius:10px;padding: 5px;" (click)="toggle_child(blgc);" class="fas fa-minus"></i>
+    <span>
+        {{BCS.BlogCategories[blgc]?.name}}
+    </span>
+    <input  type="radio" style="float:right;" name="shit" (click)="parent_element.selected_blog_category(BCS.BlogCategories[blgc]);">
+    <ul class="list-group inner" id="{{blgc}}" style="display: none;">
+        <app-blogcategory [childBlogCategories]="blgc" [parent_element]='parent_element'></app-blogcategory>
+    </ul>
+</li>
+<li class="list-group-item">
+    <button class="btn btn-success" (click)="show_cnew()"><i style="font-size:15px;" class="fas fa-plus"></i></button>
+</li>
+<div 
+    id="{{this.childBlogCategories}}_cnew_div"
+    style="position:fixed; background-color: rgba(0,0,0,0.3); top:0; left:0;right: 0;bottom: 0; z-index: 4;display:none;">
+    <div class="card" style="position: absolute; top:50%; left: 50%; transform: translate(-50%, -50%);padding:20px;">
+        <div class="card-body">
+            <h5 class="card-title">Group Name</h5>
+            <input id="{{this.childBlogCategories}}_cnew_input" class="form-control" type="text">
+            <div class="modal-footer">
+            <button class="btn btn-secondary" (click)="add_blog();">Create</button>
+            <button class="btn btn-danger" (click)="hide_cnew();">Cancel</button>
+        </div>
+        </div>
+    </div>
+</div>

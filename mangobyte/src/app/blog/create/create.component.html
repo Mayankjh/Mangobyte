@@ -1,0 +1,55 @@
+<div class="row ">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-center">Create Blog</h5>
+        <div class="card-body">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text btn btn-primary">Name of Blog</span>
+            </div>
+            <input class="form-control" type="text" id="createblg_name">
+            
+          </div><br>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text btn btn-primary">Select category</span>
+            </div>
+            <p class="form-control" id="blc-v" (click)='show_blog_categories();'></p>
+          </div>
+          <div class="card" id="blc-card" style="display:none;">
+            <ul class="list-group">
+              <app-blogcategory [childBlogCategories]="blogCategories" [parent_element]='this'></app-blogcategory>
+            </ul>
+          </div><br>
+
+          <div class="form-group">
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text btn btn-primary" for="createblg_type">Type</label>
+                  </div>
+                  <select class="custom-select form-control" id="createblg_type">
+                    <option selected>Choose...</option>
+                    <option value="1">Interview</option>
+                    <option value="2">Course</option>
+                    <option value="3">Full page blog</option>
+                   
+                  </select>
+                </div>
+            <!-- <label for="my-input">Type</label>
+            <select id="my-input" class="form-control">
+              <option value="1">Interview</option>
+              <option value="2">Course</option>
+            </select> -->
+          </div>
+
+          <button class="btn btn-success" (click)="create_blog();">Create Blog</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

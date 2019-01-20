@@ -1,0 +1,47 @@
+<span *ngIf='ls.data.islogged==false' (click)='showlogin()'>
+  Login
+</span>
+<span *ngIf='ls.data.islogged'>
+  <a href="/dashboard" style="color:white">Dashboard</a>
+</span>
+  
+
+<div id="logindiv" class="logindiv">  
+      <button class="btn btn-danger cross" (click)="hidelogin()">X</button>
+        <div class="inner" *ngIf='ls.data.islogged==false'>
+          <h3 class="text-center">Sign In</h3>
+            <div *ngIf='ls.data.islogged!=true'>
+                <p>
+                    <!-- <label>Username :</label> -->
+                    <input class="form-control" type="text" placeholder="Username"  id="loginformuser">
+                  </p>
+                  <p>
+                      <!-- <label>Password :</label> -->
+                      <input class="form-control" type="password" placeholder="Password"  id="loginformpass">
+                    </p>
+                  <p>
+                    <button type="button" (click)='login()' class="btn btn-primary" >Login</button>
+                    
+                  </p>
+                  <p style="color:#000;">Still not registered ?</p>
+                  <button style=" background:#db3236; border-radius:0px; width:100%; color:#fff; margin-bottom:3px;"class="btn btn-default">Sign Up with Google <br><i class="icon-google-plus"></i> </button> 
+            </div>
+        </div>
+        <div class="inner" *ngIf='false'>
+          <h3 class="text-center">{{ ls.user.username }}</h3>
+            <div *ngIf='ls.data.islogged==true'>
+                  <p>
+                    <!--input class="form-control" type="text" placeholder="Username"  id="loginformuser"-->
+                    <button type="button" class="btn btn-primary" >Dashboard</button>
+                  </p>
+                  <p>
+                    <button type="button" (click)='logout()' class="btn btn-danger" >Logout</button>
+                  </p>
+                  <p style="color:#000;">Connect accounts</p>
+                  <button style=" background:#db3236; border-radius:0px; width:100%; color:#fff; margin-bottom:3px;"class="btn btn-default">Sign Up with Google <br><i class="icon-google-plus"></i> </button> 
+                  
+                  <button style=" background: #3b5998; border-radius:0px; width:100%; color:#fff"class="btn btn-default">Sign Up with Facebook <br><span class="icon-facebook"></span> </button>
+            </div>
+        </div>
+        
+</div>
