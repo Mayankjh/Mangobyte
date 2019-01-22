@@ -20,5 +20,12 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  hidecomment(){
+    document.getElementById("comment123").style.display="none";
+    console.log("comment hidden");
+  }
+  showcomment(){
+    document.getElementById("comment123").style.display="block";
+    console.log("comment shown");
+  }
 }
