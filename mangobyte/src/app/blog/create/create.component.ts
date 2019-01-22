@@ -35,4 +35,5 @@ export class CreateComponent implements OnInit {
       document.getElementById('createblg_type')['value']
     )
   }
+  refresh(){}
 }

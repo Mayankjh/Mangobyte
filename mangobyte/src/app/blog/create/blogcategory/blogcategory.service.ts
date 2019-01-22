@@ -81,8 +81,8 @@ export class BlogcategoryService {
   }
 
   refresh(){
-    for(let x in this.child_elements){
-      this.child_elements[x].refresh();
+    for(let x of this.child_elements){
+      x.refresh();
     }
   }
   addChild(x:any){

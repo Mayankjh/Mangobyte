@@ -28,6 +28,8 @@ import { CourComponent } from './dashboard/components/cour/cour.component';
 import { CreateComponent } from './blog/create/create.component';
 import { PreviewdisplayerComponent } from './nav/previewdisplayer/previewdisplayer.component';
 import { EditbcComponent } from './nav/previewdisplayer/editbc/editbc.component';
+import { CommentComponent } from './courses/components/blogdetails/comment/comment.component';
+import {AccountComponent} from './account/account.component'
 
 const appRoutes: Routes = [
   
@@ -60,6 +62,8 @@ const appRoutes: Routes = [
     BlogcategoryComponent,
     PreviewdisplayerComponent,
     EditbcComponent,
+    CommentComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

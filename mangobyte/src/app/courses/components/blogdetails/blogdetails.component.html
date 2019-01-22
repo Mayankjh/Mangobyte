@@ -41,151 +41,28 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 ftco-animate">
-          <h2 class="mb-3" [ngClass]="{'btn btn-primary':editable}" [attr.contenteditable]="editable" #head>{{blog.body.head}}</h2>
-          <p [ngClass]="{'btn btn-primary':editable}" [attr.contenteditable]="editable" #disc1>{{blog.body.disc1}}</p>
+          <h2 class="mb-3" [ngClass]="{'form-control':editable}" [attr.contenteditable]="editable" #head>{{blog.body.head}}</h2>
+          <p [ngClass]="{'form-control':editable}" [attr.contenteditable]="editable" #disc1>{{blog.body.disc1}}</p>
           <p>
           <img [attr.contenteditable]="editable" src="{{blog.body.media_url}}" alt="" class="img-fluid">
-          <span [hidden]="!editable">Media Link:</span><a [ngClass]="{'btn btn-primary':editable}" class="meta-chat" [attr.contenteditable]="editable" [hidden]="!editable" #media_url>../assets/images/course-5.jpg</a>
+          <span [hidden]="!editable">Media Link:</span><a [ngClass]="{'form-control':editable}" class="meta-chat" [attr.contenteditable]="editable" [hidden]="!editable" #media_url>../assets/images/course-5.jpg</a>
           </p>
-          <p [attr.contenteditable]="editable" [ngClass]="{'btn btn-primary':editable}" #disc2>{{blog.body.disc2}}</p>
+          <p [attr.contenteditable]="editable" [ngClass]="{'form-control':editable}" #disc2>{{blog.body.disc2}}</p>
           
           
           <div class="about-author d-flex p-5 bg-light">
             <div class="bio align-self-md-center mr-5">
           <img src="{{blog.body.authorimg}}" alt="Image placeholder" class="img-fluid mb-4">
-              <span [hidden]="!editable">Media Link:</span><a [ngClass]="{'btn btn-primary':editable}" class="meta-chat" [attr.contenteditable]="editable" [hidden]="!editable" #authorimg>../assets/images/course-5.jpg</a>
+              <span [hidden]="!editable">Media Link:</span><a [ngClass]="{'form-control':editable}" class="meta-chat" [attr.contenteditable]="editable" [hidden]="!editable" #authorimg>../assets/images/course-5.jpg</a>
             </div>
             <div class="desc align-self-md-center">
-              <h3 [attr.contenteditable]="editable" [ngClass]="{'btn btn-primary':editable}" #author>{{blog.body.author}}</h3>
-              <p [attr.contenteditable]="editable" [ngClass]="{'btn btn-primary':editable}" #authdesc>{{blog.body.authdesc}}</p>
+              <h3 [attr.contenteditable]="editable" [ngClass]="{'form-control':editable}" #author>{{blog.body.author}}</h3>
+              <p [attr.contenteditable]="editable" [ngClass]="{'form-control':editable}" #authdesc>{{blog.body.authdesc}}</p>
             </div>
           </div>
 
 
-          <div class="pt-5 mt-5">
-            <h3 class="mb-5">6 Comments</h3>
-            <ul class="comment-list">
-              <li class="comment">
-                <div class="vcard bio">
-                  <img src="../../../assets/images/person_1.jpg" alt="Image placeholder">
-                </div>
-                <div class="comment-body">
-                  <h3>John Doe</h3>
-                  <div class="meta">June 27, 2018 at 2:21pm</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus,
-                    ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum
-                    impedit necessitatibus, nihil?</p>
-                  <p><a href="#" class="reply">Reply</a></p>
-                </div>
-              </li>
-
-              <li class="comment">
-                <div class="vcard bio">
-                  <img src="../../../assets/images/person_1.jpg" alt="Image placeholder">
-                </div>
-                <div class="comment-body">
-                  <h3>John Doe</h3>
-                  <div class="meta">June 27, 2018 at 2:21pm</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus,
-                    ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum
-                    impedit necessitatibus, nihil?</p>
-                  <p><a href="#" class="reply">Reply</a></p>
-                </div>
-
-                <ul class="children">
-                  <li class="comment">
-                    <div class="vcard bio">
-                      <img src="../../../assets/images/person_1.jpg" alt="Image placeholder">
-                    </div>
-                    <div class="comment-body">
-                      <h3>John Doe</h3>
-                      <div class="meta">June 27, 2018 at 2:21pm</div>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure!
-                        Quam voluptas earum impedit necessitatibus, nihil?</p>
-                      <p><a href="#" class="reply">Reply</a></p>
-                    </div>
-
-
-                    <ul class="children">
-                      <li class="comment">
-                        <div class="vcard bio">
-                          <img src="../../../assets/images/person_1.jpg" alt="Image placeholder">
-                        </div>
-                        <div class="comment-body">
-                          <h3>John Doe</h3>
-                          <div class="meta">June 27, 2018 at 2:21pm</div>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                            necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste
-                            iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                          <p><a href="#" class="reply">Reply</a></p>
-                        </div>
-
-                        <ul class="children">
-                          <li class="comment">
-                            <div class="vcard bio">
-                              <img src="../../../assets/images/person_1.jpg" alt="Image placeholder">
-                            </div>
-                            <div class="comment-body">
-                              <h3>John Doe</h3>
-                              <div class="meta">June 27, 2018 at 2:21pm</div>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste
-                                iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                              <p><a href="#" class="reply">Reply</a></p>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="comment">
-                <div class="vcard bio">
-                  <img src="../../../assets/images/person_1.jpg" alt="Image placeholder">
-                </div>
-                <div class="comment-body">
-                  <h3>John Doe</h3>
-                  <div class="meta">June 27, 2018 at 2:21pm</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus,
-                    ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum
-                    impedit necessitatibus, nihil?</p>
-                  <p><a href="#" class="reply">Reply</a></p>
-                </div>
-              </li>
-            </ul>
-            <!-- END comment-list -->
-
-            <div class="comment-form-wrap pt-5">
-              <h3 class="mb-5">Leave a comment</h3>
-              <form action="#" class="p-5 bg-light">
-                <div class="form-group">
-                  <label for="name">Name *</label>
-                  <input type="text" class="form-control" id="name">
-                </div>
-                <div class="form-group">
-                  <label for="email">Email *</label>
-                  <input type="email" class="form-control" id="email">
-                </div>
-                <div class="form-group">
-                  <label for="website">Website</label>
-                  <input type="url" class="form-control" id="website">
-                </div>
-
-                <div class="form-group">
-                  <label for="message">Message</label>
-                  <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                  <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-                </div>
-
-              </form>
-            </div>
-          </div>
-
+            <app-comment [blog]="blog"></app-comment>
         </div> <!-- .col-md-8 -->
         <div class="col-md-4 sidebar ftco-animate">
           <div class="sidebar-box">
@@ -269,9 +146,8 @@
 
       </div>
     </div>
-  </section> <!-- .section -->
-
-  <section class="ftco-section-parallax">
+  </section>
+<section class="ftco-section-parallax">
     <div class="parallax-img d-flex align-items-center">
       <div class="container">
         <div class="row d-flex justify-content-center">

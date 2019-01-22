@@ -1,0 +1,25 @@
+<ng-container *ngIf="show=='icon'">
+   <div class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" style="padding:0;" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i *ngIf="!AC.islogged" class="material-icons">face</i>
+      <img *ngIf="AC.islogged" class="account-image-small" src="{{AC.user.getBasicProfile().getImageUrl()}}">
+    </a>
+    <div class="dropdown-menu dropdown-menu-right primary" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="javascript:void(0)" id="google_login_btn" >
+        <ng-container *ngIf="AC.islogged">
+          Change user
+        </ng-container>
+        <ng-container *ngIf="!AC.islogged">
+          Login with google
+        </ng-container> </a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" (click)="logout()" href="javascript:void(0)" *ngIf="AC.islogged">Logout</a>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="show=='dashboard'">
+  <div (click)="AC.islogged?logout():login()">
+      <h1 *ngIf="!AC.islogged" class="material-icons">Login With Google to Comment</h1>
+      <img *ngIf="AC.islogged" class="account-image-small" src="{{AC.user.getBasicProfile().getImageUrl()}}">
+  </div>
+ </ng-container>
