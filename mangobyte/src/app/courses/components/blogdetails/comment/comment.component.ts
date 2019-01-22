@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AccountService } from 'src/app/account/account.service';
 
 @Component({
   selector: 'app-comment',
@@ -15,7 +16,7 @@ export class CommentComponent implements OnInit {
   comments=[
     {image:'', time:'', comment:''}
   ]
-  constructor() { }
+  constructor(private AC:AccountService) { }
 
   ngOnInit() {
   }
