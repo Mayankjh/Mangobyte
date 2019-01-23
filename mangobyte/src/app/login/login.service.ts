@@ -18,7 +18,7 @@ export class LoginService {
       islogged:false,
       token:''
     }
-    // this.serverurl = "http://localhost:8000/";
+    this.serverurl = "http://localhost:8000/";
     var token = localStorage.getItem('auth_token');
     if(token==null){
       // user not logged
@@ -36,7 +36,7 @@ export class LoginService {
 
   }
   check_user(){
-    this.http.get(this.serverurl+'users/1/', 
+    this.http.get(this.serverurl+'users/', 
     { 
       headers:new HttpHeaders()
         .set('Authorization', 'Token '+localStorage.auth_token)
@@ -56,7 +56,7 @@ export class LoginService {
       
     })
   }
-  login(username:string, password:string){
+  public login(username:string, password:string){
     this.http.post(this.serverurl+'login/',
         new HttpParams()
           .set('username', username)
@@ -86,10 +86,12 @@ export class LoginService {
       }, ()=>{
         document.getElementById("logindiv").style.display="none";
         this.refresh();
-        //window.location.reload();
-        //alert('Login Successful');
-        
       });
+  }
+  public googlelogin(id_token:string){
+      if(this.data.islogged){
+        return ; // No need to login
+      }
   }
 
   logout(){

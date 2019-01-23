@@ -18,7 +18,7 @@
   </div>
 </ng-container>
 <ng-container *ngIf="show=='dashboard'">
-  <div (click)="AC.islogged?logout():login()">
+  <div (click)="AC.islogged?AC.logout():AC.login()">
       <h1 *ngIf="!AC.islogged" class="material-icons">Login With Google to Comment</h1>
       <img *ngIf="AC.islogged" class="account-image-small" src="{{AC.user.getBasicProfile().getImageUrl()}}">
   </div>

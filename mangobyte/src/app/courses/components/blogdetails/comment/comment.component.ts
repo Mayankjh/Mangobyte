@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AccountService } from 'src/app/account/account.service';
+import { CommentService } from './comment.service';
 
 @Component({
   selector: 'app-comment',
@@ -7,18 +8,17 @@ import { AccountService } from 'src/app/account/account.service';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
-  @Input() blog:any={
-    url:'',
-    name:'',
-    body:''
-  }
-  @Input() parent:any=null;
-  comments=[
-    {image:'', time:'', comment:''}
-  ]
-  constructor(private AC:AccountService) { }
+  @Input() blog:any
+  @Input() position:any=''
+  @Input() comments:any
+  commentor_list:any={}
+  commentors_details:any
+  constructor(private AC:AccountService, private CS:CommentService) { }
 
   ngOnInit() {
+    //console.log(this.comments);
+    
+
   }
   hidecomment(){
     document.getElementById("comment123").style.display="none";

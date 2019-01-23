@@ -47,7 +47,8 @@ export class BlogService {
           date:'10 Dec 2019',
           username:'Admin',
           media_url:'../assets/images/course-5.jpg',
-          disc:'This is the body of the blog'
+          disc:'This is the body of the blog',
+          comments:[]
         })),
         {
           headers:this.ls.getHeaders()

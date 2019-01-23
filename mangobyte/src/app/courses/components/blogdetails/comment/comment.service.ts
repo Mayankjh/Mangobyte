@@ -10,8 +10,8 @@ export class CommentService {
   constructor(private LS:LoginService) { }
 
   comment(id_token, blog_url, id, content){
-    return this.LS.http.post(
-      blog_url+'/comment/',
+    this.LS.http.post(
+      blog_url+'comment/',
       new HttpParams()
         .set('gid', id_token)
         .set('id', id)
@@ -19,7 +19,9 @@ export class CommentService {
         {
           headers:this.LS.getHeaders()
         }
-    )
+    ).subscribe(data=>{
+      alert(data);
+    })
   }
 
 }
