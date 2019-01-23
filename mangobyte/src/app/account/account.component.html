@@ -19,7 +19,7 @@
 </ng-container>
 <ng-container *ngIf="show=='dashboard'">
   <div (click)="AC.islogged?AC.logout():AC.login()">
-      <h1 *ngIf="!AC.islogged" class="material-icons">Login With Google to Comment</h1>
+      <button style="border-radius:0px;" *ngIf="!AC.islogged" class="material-icons btn btn-danger">Login with <i class="icon-google-plus"></i></button>
       <img *ngIf="AC.islogged" class="account-image-small" src="{{AC.user.getBasicProfile().getImageUrl()}}">
   </div>
  </ng-container>
