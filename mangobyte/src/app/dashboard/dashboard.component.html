@@ -1,8 +1,8 @@
-<ng-container *ngIf="this.BCS.ls.data.islogged">
+<ng-container *ngIf="this.BCS.ls.islogged">
 
 
 <div class="sidebar">
-    <a style="background:#fc4b6c;color:white;"><i class="fas fa-user"></i> Hi {{this.BCS.ls.user.username}}</a>
+    <a style="background:#fc4b6c;color:white;"><img class="account-image-small" src="{{BCS.ls.data.user.info.picture}}"> {{this.BCS.ls.data.user.info.name}}</a>
     <ng-container *ngFor="let nav of nav_list">
         <a href="javascript:void(0)" [ngClass]="{'active':nav_selected==nav[0]}" (click)="updatenav(nav);">
 
@@ -150,7 +150,7 @@
     </ng-container>
 </div>
 </ng-container>
-<div class="card" *ngIf="!this.BCS.ls.data.islogged">
+<div class="card" *ngIf="!this.BCS.ls.islogged">
     <div class="card-header">
         Login Required
     </div>

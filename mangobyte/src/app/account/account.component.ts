@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { AccountService } from './account.service';
+import { LoginService } from '../login/login.service';
 //import { AccountService } from '../about/account.service';
 
 @Component({
@@ -10,8 +11,8 @@ import { AccountService } from './account.service';
 export class AccountComponent implements OnInit {
   @Input() show: any;
   
-  constructor(private cdr:ChangeDetectorRef, private AC:AccountService) { 
-    AC.addChild(this);  
+  constructor(private cdr:ChangeDetectorRef, private AC:AccountService, private LS:LoginService) { 
+    LS.addChild(this);  
   }
   googleUser = {};
 
@@ -23,7 +24,7 @@ export class AccountComponent implements OnInit {
     this.AC.startApp();
   }
   refresh(){
-    var self=this;
+    //var self=this;
     this.cdr.detectChanges();
     //console.log(this);
   }

@@ -9,11 +9,11 @@
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto">
         <li *ngFor="let nav of nav_elements" [ngClass]="{'nav-item':true, 'active':nav_selected==nav[0]}">
-          <a class="nav-link" (click)="change_nav(nav)" href="javascript:void(0)">{{nav[0]}}</a>
+          <a class="nav-link vertical-center" (click)="change_nav(nav)" href="javascript:void(0)">{{nav[0]}}</a>
         </li>
-        <li class="nav-item cta"><a class="nav-link">
-            <app-login></app-login>
-          </a></li>
+        <li class="nav-item"><a class="nav-link vertical-center">
+            <app-account [show]="'icon'"></app-account>
+        </a></li>
       </ul>
     </div>
   </div>

@@ -6,60 +6,58 @@ import { LoginService } from '../login/login.service';
   providedIn: 'root'
 })
 export class AccountService {
-
-  serverurl = "http://localhost:8000/"
   startApp
-  constructor(public http:HttpClient, LS:LoginService) { 
-    //this.serverurl="https://hashbook.herokuapp.com/"
+  initialized=false;
+  constructor(public http:HttpClient,private LS:LoginService) { 
     var self = this;
+    if(this.initialized) return;
+    this.initialized=true;
     this.startApp = function () {
       window['gapi'].load('auth2', function () {
         window['auth2'] = window['gapi'].auth2.init({
           client_id: '716951121838-plvdimng1engvdjog7fp8hlg8g8th6c2.apps.googleusercontent.com',
           cookiepolicy: 'single_host_origin',
         });
-        //self.attachSignin(document.getElementById('google_login_btn'), self);
-      
-      
-      window['auth2'].isSignedIn.listen((val)=>{self.signinChanged(val,self)});
-      window['auth2'].currentUser.listen(val=>self.userChanged(val, self));
-      if(window['auth2'].isSignedIn.get()==true){
-        // 
-        console.log(window['auth2'].currentUser.get())
-        self.user=window['auth2'].currentUser.get();
-        self.islogged=true;
-      } else {
-        self.user=null;
-        self.islogged=false;
-      }
-
+        window['auth2'].isSignedIn.listen((val)=>{self.signinChanged(val,self)});
+        window['auth2'].currentUser.listen(val=>self.userChanged(val, self));
+        if(window['auth2'].isSignedIn.get()==true){
+          // check login service that if user is logged or not
+          if(self.LS.islogged){
+            // nothing to do from server side
+          } else {
+            // user not already logged, so google login now note: login can still be denied from LS
+            self.LS.google_login(window['auth2'].currentUser.get().getAuthResponse().id_token);
+          } 
+        }
       });
-
-
     };
   }
   signinChanged(val, self){
-    //console.log("sign in state changed to", val, self);
-    // check the server for the user details, if token valid, hurray, continue
-    if(!val){  
-    self.user=null;
-      self.islogged=false;
+    /**
+     * on refresh if
+     *  user is logged : it will be called
+     *  user is not logged : it wont be called
+     * on login change: it will be called
+     */
+    if(val){
+      // user is signed in
+      this.LS.google_login(window['auth2'].currentUser.get().getAuthResponse().id_token);
+    } else {
+      // user is logged out, first logout from LS
+
     }
-    this.refresh();
-    // else provide the id_token to signin again
   }
   google_success(googleUser) {
-    //console.log(googleUser);
+    console.log(googleUser);
   }
   google_failed(error) {
     console.log(error);
   }
   logout(){
     var self=this;
-    //this.AC.logout().subscribe(data=>{
+    this.LS.logout((()=>{
       window['auth2'].signOut();
-      self.refresh();
-    //})
+    }))
     
   }
   login(){
@@ -71,50 +69,6 @@ export class AccountService {
       self.islogged=false;
       return;
     }
-    //console.log("Sign in user changed", val);
-    //console.log(val);
-    //self.googleLogin(val.getAuthResponse().id_token);
-    //if(window['auth2'].isSignedIn.get())
-    //self.user=val;
-    //else{}
-  }
-  islogged=false
-  user:any=null;
-  token:string=null;
-  googleLogin(id_token){
-    return this.http.post(this.serverurl+'logingoogle/', new HttpParams().set('id_token', id_token))
-      .subscribe(data=>{
-        if(data['token'] != 'failed') {
-          this.token=data['token']
-          this.islogged=true
-          // here 
-          this.refresh();
-        }
-      })
-  }
-  checkuser(){
-
   }
   
-  child_elements:any=[]
-  addChild(element:any){
-    if(this.child_elements.indexOf(element)==-1)
-      this.child_elements.push(element)
-    else console.log("Element already existed")
-    
-  }
-  refresh(){
-    var self=this;
-    if(window['auth2'].isSignedIn.get()==true){
-      // 
-      console.log(window['auth2'].currentUser.get())
-      self.user=window['auth2'].currentUser.get();
-      self.islogged=true;
-    } else {
-      self.user=null;
-      self.islogged=false;
-    }
-    for(let x of this.child_elements) x.refresh();
-  }
-
 }

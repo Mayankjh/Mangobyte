@@ -41,7 +41,7 @@ export class BlogcategoryService {
       new HttpParams()
         .set('name', child_name)
         .set('parent', parent_url)
-        .set('creator', this.ls.user.url)
+        .set('creator', this.ls.data.user.url)
         .set('body', '{"title":"Title of description","image":"../assets/images/course-5.jpg","disc":"Body Of description"}')
       ,
       {

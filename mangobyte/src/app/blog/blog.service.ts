@@ -40,7 +40,7 @@ export class BlogService {
     this.ls.http.post(this.ls.serverurl+'blogs/blog/',
       new HttpParams()
         .set('name', name)
-        .set('creator', this.ls.user.url)
+        .set('creator', this.ls.data.user.url)
         .set('category', cateblg_url)
         .set('blog_type', type)
         .set('body', JSON.stringify({
