@@ -16,7 +16,7 @@ export class LoginService {
   public after_verify:any=[];
 
   constructor(public http:HttpClient){
-    this.serverurl="http://localhost:8000/";
+    //this.serverurl="http://localhost:8000/";
     // check if user details present or not
       var token = localStorage.getItem('auth_token');
       //user = localStorage.getItem('auth_user');
