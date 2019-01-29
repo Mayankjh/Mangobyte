@@ -10,7 +10,8 @@ export class BlogComponent implements OnInit {
   @Input() do:any;
   public blog:any;
   refreshed=false;
-  constructor(private bs:BlogService,private cdr:ChangeDetectorRef) {
+  constructor(private BS:BlogService,private cdr:ChangeDetectorRef) {
+    BS.addChild(this);
   }
   refresh(){
     this.refreshed=true;
@@ -18,10 +19,9 @@ export class BlogComponent implements OnInit {
     this.cdr.detectChanges();
   }
   ngOnInit() {
-    this.bs.child = this;
     var self=this;
     if(this.do.show!="create")
-      this.bs.getblog(this.do['id'], self);
+      this.BS.getblog(this.do['id'], self);
   }
 
 }

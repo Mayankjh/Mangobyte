@@ -7,7 +7,7 @@ var $:any;
   styleUrls: ['./blogcategory.component.scss']
 })
 export class BlogcategoryComponent implements OnInit {
-  @Input() childBlogCategories:string='';
+  @Input() parentBlogCategory:string='';
   @Input() parent_element:any;
   private clevelblogs=[]
   constructor(private BCS:BlogcategoryService, private cdr:ChangeDetectorRef) { 
@@ -20,17 +20,14 @@ export class BlogcategoryComponent implements OnInit {
   refresh(){
     var parent=null;
     this.clevelblogs=[];
-    //console.log(this.childBlogCategories);
-    if(this.childBlogCategories==undefined || this.childBlogCategories=='') this.childBlogCategories='root';
-    if(this.childBlogCategories!='root'){
-      // get all the categories
-      parent=this.childBlogCategories;
+    //console.log(this.parentBlogCategory);
+    if(this.parentBlogCategory==undefined || this.parentBlogCategory=='') this.parentBlogCategory='root';
+    if(this.parentBlogCategory!='root'){
+      parent=this.parentBlogCategory;
     }
     for(var cat in this.BCS.BlogCategories){
-        if(this.BCS.BlogCategories[cat].parent==parent)this.clevelblogs.push(cat);
+        if(this.BCS.BlogCategories[cat].category==parent)this.clevelblogs.push(cat);
     }
-    //this.cdr.detectChanges();
-    //console.log(this.parent_element);
   }
   toggle_child(blgc){
     var e=document.getElementById(blgc);
@@ -39,16 +36,16 @@ export class BlogcategoryComponent implements OnInit {
   }
   hide_child=true;
   show_cnew(){
-    if(this.childBlogCategories==undefined)this.childBlogCategories='';
+    if(this.parentBlogCategory==undefined)this.parentBlogCategory='';
 
-    document.getElementById(this.childBlogCategories+'_cnew_div').style.display='block';
+    document.getElementById(this.parentBlogCategory+'_cnew_div').style.display='block';
   }
   hide_cnew(){
-    document.getElementById(this.childBlogCategories+'_cnew_div').style.display='none';
+    document.getElementById(this.parentBlogCategory+'_cnew_div').style.display='none';
   }
   add_blog(){
-    this.BCS.create_bc(this.childBlogCategories, document.getElementById(this.childBlogCategories+'_cnew_input')['value']);
-    document.getElementById(this.childBlogCategories+'_cnew_input')['value']='';
+    this.BCS.create_bc(this.parentBlogCategory, document.getElementById(this.parentBlogCategory+'_cnew_input')['value']);
+    document.getElementById(this.parentBlogCategory+'_cnew_input')['value']='';
     this.hide_cnew();
     
   }

@@ -10,7 +10,7 @@ import { BlogcategoryService } from './blogcategory/blogcategory.service';
 export class CreateComponent implements OnInit {
 
   blogCategories:string;
-  constructor(private bs:BlogService, private BCS:BlogcategoryService) {
+  constructor(private BS:BlogService, private BCS:BlogcategoryService) {
     this.blogCategories='root'
     this.BCS.addChild(this);
 
@@ -27,13 +27,6 @@ export class CreateComponent implements OnInit {
   }
   ngOnInit() {
     
-  }
-  create_blog(){
-    this.bs.create_blog(
-      document.getElementById('createblg_name')['value'],
-      this.selected_blc,
-      document.getElementById('createblg_type')['value']
-    )
   }
   refresh(){}
 }

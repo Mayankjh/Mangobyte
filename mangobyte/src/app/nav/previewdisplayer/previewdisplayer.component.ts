@@ -16,33 +16,12 @@ export class PreviewdisplayerComponent implements OnInit {
     private BLS:BlogService,private LS:LoginService, private cdr:ChangeDetectorRef) { 
     BCS.addChild(this);
     BLS.addChild(this);
-    if(this.BLS.allBlogs==null){
-      this.BLS.getAllBlogs();
-    }
-    
   }
   editable=false
   refresh(){
-    //console.clear();
-    //console.log(this.parent_bc, this.BCS.BlogCategories);
-    this.group_list=[];
-    for(var x in this.BCS.BlogCategories){
-      if(this.BCS.BlogCategories[x].parent==this.parent_bc){
-        this.group_list.push(this.BCS.BlogCategories[x].url);
-      }
-    }
-    //console.log(this.parent_bc, this.BLS.allBlogs);
-    //console.log(this.parent_bc, "@@@@@@@@@@@@@@@")
-    this.blog_list=[];
-    for(var x in this.BLS.allBlogs){
-      if(this.BLS.allBlogs[x].category==this.parent_bc)
-      {
-        this.blog_list.push(x);
-        console.log(x);
-      }
-    }
+    this.group_list=this.BCS.BlogCategories[this.parent_bc].child_categories;
+    this.blog_list=this.BCS.BlogCategories[this.parent_bc].child_blogs;
     console.log(this.blog_list, this.group_list);
-
     this.cdr.detectChanges();
   }
   changeto(v){

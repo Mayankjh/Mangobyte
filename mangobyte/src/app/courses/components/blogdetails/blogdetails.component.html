@@ -17,7 +17,7 @@
           <p class="breadcrumbs"><span class="mr-2"><a href="/home">{{blog.name}}</a></span> <span class="mr-2"><a href="blog.html"></a></span>
             <span>Blog Details</span></p>
           <h1 class="mb-3 bread">{{blog.name}}</h1>
-          <button *ngIf="!editable && this.LS.data.islogged" (click)="editable=!editable" class="btn btn-danger">
+          <button *ngIf="!editable && this.LS.islogged" (click)="editable=!editable" class="btn btn-danger">
             <i class="fas fa-edit">Edit</i>
           </button>
           <button *ngIf="editable" class="btn btn-success" (click)="update_blog(

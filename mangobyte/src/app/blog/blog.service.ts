@@ -5,71 +5,43 @@ import { HttpBackend, HttpHeaders, HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class BlogService {
-  public child;
-  constructor(private ls:LoginService) {
-    // check the existing permissions of the user regarding this blog
+  Blogs:any={}
+  constructor(private LS:LoginService){
+    this.getAllBlogs();
   }
-  public allBlogs:any=null;
   getAllBlogs(){
-    this.ls.http.get(this.ls.serverurl+"blogs/blog/",
-        {
-          headers: this.ls.getHeaders()
-        }
-    ).subscribe(data=>{
-      /*console.log(data); */
-      this.allBlogs=data;
-      for(let x of this.allBlogs){
-        if(x.body.disc==undefined){
-          x.body=JSON.parse(x.body);
-        }
+    // only the previews will be loaded
+    this.LS.http.get(this.LS.serverurl+'blogs/blog/', {
+        headers: this.LS.getHeaders()
+    }).subscribe( (data:any)=>{
+      for(let x of data){
+        this.Blogs[x.url]=x;
       }
-      this.refresh();
-    }, error=>{console.log(error)});
-  }
-  getblog(no, child){
-    console.log(this.ls.data.token);
-    this.ls.http.get(this.ls.serverurl+"blogs/blog/"+no+"/",
-        {
-          headers: this.ls.getHeaders()
-        }
-    ).subscribe(data=>{console.log(data); child.blog=data;child.refresh();}, error=>{console.log(error)}, ()=>{
+      console.log(this.Blogs);
+    }, error=>console.log(error), ()=>{
       this.refresh();
     });
   }
-  create_blog(name:string, cateblg_url:string,type:string){
-    this.ls.http.post(this.ls.serverurl+'blogs/blog/',
-      new HttpParams()
-        .set('name', name)
-        .set('creator', this.ls.data.user.url)
-        .set('category', cateblg_url)
-        .set('blog_type', type)
-        .set('body', JSON.stringify({
-          date:'10 Dec 2019',
-          username:'Admin',
-          media_url:'../assets/images/course-5.jpg',
-          disc:'This is the body of the blog',
-          comments:[]
-        })),
-        {
-          headers:this.ls.getHeaders()
-        }
-      ).subscribe(data=>{
-        alert("Blog created successfully")
-      }, error=>{
-        console.log('errror')
+  getBlog(url:string){
+    // returns s subscribable that will provide the body as well
+    return this.LS.http.get(url)
+  }
+  create_blog(name:string, category:string, blog_type:string, body:any){
+    this.LS.http.post(this.LS.serverurl+'blogs/blog/', new HttpParams()
+      .set('name', name)
+      .set('blog_type', blog_type)
+      .set('category', category)
+      .set('body', JSON.stringify(body)), {
+        headers:this.LS.getHeaders()
+      }).subscribe((data:any)=>{
+        this.Blogs[data.url]=data;
+        alert('Blog is created successfully');
+        this.refresh();
       })
   }
-  update_blog(url, name, body){
-    this.ls.http.patch(url, new HttpParams()
-              .set('name', name)
-              .set('body', body),
-              {headers:this.ls.getHeaders()}
-    ).subscribe(data=>{
-      this.getAllBlogs();
-    }, error=>{
-      console.log(error)
-    })
-  }
+
+
+  //refresh childs
   child_elements=[];
   refresh(){
     for(let x in this.child_elements){
@@ -81,15 +53,6 @@ export class BlogService {
       this.child_elements.push(x);
     }
   }
-  deleteBlog(url){
-    this.ls.http.delete(url, {
-      headers:this.ls.getHeaders()
-    }).subscribe(
-      data=>{
-        this.getAllBlogs();
-        alert("The blog was deleted");
-      }
-    )
-  }
+
 }
 

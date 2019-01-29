@@ -14,7 +14,7 @@
           <h3 class="heading mt-3"><a [attr.contenteditable]="editable" #name>{{this.BLS.allBlogs[blog].name}}</a></h3>
           <p [ngClass]="{'btn btn-primary':editable}" [attr.contenteditable]="editable" #disc>{{this.BLS.allBlogs[blog].body.disc}}</p>
         </div>
-        <button *ngIf="!editable && this.LS.data.islogged" (click)="editable=!editable" class="btn btn-danger">
+        <button *ngIf="!editable && this.LS.islogged" (click)="editable=!editable" class="btn btn-danger">
           <i class="fas fa-edit"></i>
         </button>
         <button *ngIf="editable" class="btn btn-success" (click)="update_blog(

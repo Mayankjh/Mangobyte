@@ -1,156 +1,174 @@
-<ng-container *ngIf="this.BCS.ls.islogged">
+<ng-container *ngIf="LS.islogged">
 
 
-<div class="sidebar">
-    <a style="background:#fc4b6c;color:white;"><img class="account-image-small" src="{{BCS.ls.data.user.info.picture}}"> {{this.BCS.ls.data.user.info.name}}</a>
-    <ng-container *ngFor="let nav of nav_list">
-        <a href="javascript:void(0)" [ngClass]="{'active':nav_selected==nav[0]}" (click)="updatenav(nav);">
+    <div class="sidebar">
+        <a style="background:#fc4b6c;color:white;"><img class="account-image-small" src="{{LS.data.user.info.picture}}">
+            {{this.LS.data.user.info.name}}</a>
+        <ng-container *ngFor="let nav of nav_list">
+            <a href="javascript:void(0)" [ngClass]="{'active':nav_selected==nav[0]}" (click)="updatenav(nav);">
 
-            <i class="fas fa-{{ nav[1] }}"></i>
-            {{ nav[0] }}
-        </a>
-    </ng-container>
-</div>
-<div class="content">
-    <div class="row page-titles">
-        <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor">Welcome to Dashboard</h3>
-        </div>
-        <div class="col-md-7 col-4 align-self-center">
-            <a style="border-radius:4px;background:#fc4b6c;color:white;float:right;" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"
-                href="/"><i class="fa fa-reply" aria-hidden="true"></i>Website</a>
-        </div>
+                <i class="fas fa-{{ nav[1] }}"></i>
+                {{ nav[0] }}
+            </a>
+        </ng-container>
     </div>
-    <ng-container *ngIf="nav_selected=='Create Blog'">
-        <app-create></app-create>
-    </ng-container>
-    <ng-container *ngIf="nav_selected=='Edit a blog category'">
-        <div class="card" id="blc-card">
-            <ul class="list-group">
-                <app-blogcategory [childBlogCategories]="'root'" [parent_element]='this'></app-blogcategory>
-            </ul>
+    <div class="content">
+        <div class="row page-titles">
+            <div class="col-md-5 col-8 align-self-center">
+                <h3 class="text-themecolor">Welcome to Dashboard</h3>
+            </div>
+            <div class="col-md-7 col-4 align-self-center">
+                <a style="border-radius:4px;background:#fc4b6c;color:white;float:right;" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"
+                    href="/"><i class="fa fa-reply" aria-hidden="true"></i>Website</a>
+            </div>
         </div>
-        <div class="card">
-            <div class="card-body">
-                    <ng-container *ngIf="selected_blc!=null">
+        <ng-container *ngIf="nav_selected=='Create Blog'">
+            <app-create></app-create>
+        </ng-container>
+        <ng-container *ngIf="nav_selected=='Edit a blog category'">
+            <div class="card" id="blc-card">
+                <ul class="list-group">
+                    <app-blogcategory [parentBlogCategory]="'root'" [parent_element]='this'></app-blogcategory>
+                </ul>
+            </div>
+            <ng-container *ngIf="selected_blc!=null">
+                <div class="card">
+                    <div class="card-body">
                         <div class="">
                             <div class="course align-self-stretch">
-                                <a class="img" id="bce_image_prev"></a>
-                                <small>
-                                    <p contenteditable="true" id="bce_image">{{
-                                        this.BCS.BlogCategories[selected_blc].body.image }}</p>
-                                </small>
+                                <img class="img" id="bce_image_prev" src="{{this.BCS.BlogCategories[selected_blc].body.image}}">
                                 <div class="text p-4">
-                                    <p class="category"><span contenteditable="true" id="bce_name">{{
-                                            this.BCS.BlogCategories[selected_blc].name }}</span><span class="price">
-                                        </span></p>
-                                    <h3 class="mb-3"><a contenteditable="true" id="bce_title">{{this.BCS.BlogCategories[selected_blc].body.title}}</a></h3>
-                                    <p id="bce_desc" contenteditable="true">{{
-                                        this.BCS.BlogCategories[selected_blc].body.disc }}</p>
+                                        <div class="form-group">
+                                                <label for=#bcetitle>Image Url : use assets\images\course-n.jpg for default where n is in [1,6]</label>
+                                                <input #bceimage class="form-control" type="text" value="{{this.BCS.BlogCategories[selected_blc].body.image}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for=#bcetitle>Name</label>
+                                            <input #bcename class="form-control" type="text" value="{{this.BCS.BlogCategories[selected_blc].name}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for=#bcetitle>Title</label>
+                                            <input #bcetitle class="form-control" type="text" value="{{this.BCS.BlogCategories[selected_blc].body.title}}">
+                                        </div>
+                                    <div class="form-group">
+                                        <label for=#bcedisc>Disc</label>
+                                        <textarea #bcedisc id="my-input" class="form-control" rows="3">{{this.BCS.BlogCategories[selected_blc].body.disc }}</textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success" (click)="BCS.updateBlog(selected_blc, bcename.value, {'image':bceimage.value, 'title':bcetitle.value, 'disc':bcedisc.value})">Update</button>
+                        <button class="btn btn-danger" (click)="BCS.delete_bc(selected_blc); selected_blc=null;">Delete</button>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="nav_selected=='Courses'">
+            <app-cour></app-cour>
+        </ng-container>
+        <ng-container *ngIf="nav_selected=='Home'">
 
-                    </ng-container>
-                
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-success" (click)="update_bc()">Update</button>
-                <button class="btn btn-danger" (click)="delete_bc()">Delete</button>
-            </div>
-        </div>
-    </ng-container>
-    <ng-container *ngIf="nav_selected=='Courses'">
-        <app-cour></app-cour>
-    </ng-container>
-    <ng-container *ngIf="nav_selected=='Home'">
-        
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">New Features</li>
                 </ol>
                 <div class="accordion" id="accordionExample">
-                        <div class="card">
-                          <div class="card-header" id="headingOne">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Category
-                              </button>
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    Category
+                                </button>
                             </h5>
-                          </div>
-                      
-                          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                              <ul>
-                                  <li>To create from either 'Create blog', or 'Edit a category', select a dropdown list and click on green '+' icon</li>
-                              </ul>
-                            </div>
-                          </div>
                         </div>
-                        <div class="card">
-                          <div class="card-header" id="headingTwo">
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <ul>
+                                    <li>To create from either 'Create blog', or 'Edit a category', select a dropdown
+                                        list and click on green '+' icon</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
                             <h5 class="mb-0">
-                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Blogs
-                              </button>
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                    Blogs
+                                </button>
                             </h5>
-                          </div>
-                          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <div class="card-body">
-                              Blogs can be created at any level in category, except the root, but make sure to follow the following procedure,
-                              <ul>
-                                  <li>In case of interviews, create blog only after 2nd level i.e. Interviews>Acedemia>Misslineous>Your_blog</li>
-                                  <li>In case of courses too, create blog only after 2nd level i.e. Courses>Acedemia>Misslineous>Your_blog</li>
-                                  <li>For editing make sure you are logged in, then a pen icon will be shown with red background, click on it then edit as u like</li>
-                                  <li>In case you just want to create category under some catagory of Interview/Courses i.e the third level under which certain courses or interview shall appear. <br> Follow the same procedure to create catagory now go to edit a blog and select the category you created below you shall see a preview of the same delete the title and descrption of that catagory and tha's it you created a catagory name.</li>
-                              </ul>
-                              Make Sure to :
-                              <ul>
-                                  <li>Choose type interviews for video</li>
-                                  <li>Type courses for image background</li>
-                              </ul>
-                            </div>
-                          </div>
                         </div>
-                        <div class="card">
-                          <div class="card-header" id="headingThree">
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                Blogs can be created at any level in category, except the root, but make sure to follow
+                                the following procedure,
+                                <ul>
+                                    <li>In case of interviews, create blog only after 2nd level i.e.
+                                        Interviews>Acedemia>Misslineous>Your_blog</li>
+                                    <li>In case of courses too, create blog only after 2nd level i.e.
+                                        Courses>Acedemia>Misslineous>Your_blog</li>
+                                    <li>For editing make sure you are logged in, then a pen icon will be shown with red
+                                        background, click on it then edit as u like</li>
+                                    <li>In case you just want to create category under some catagory of
+                                        Interview/Courses i.e the third level under which certain courses or interview
+                                        shall appear. <br> Follow the same procedure to create catagory now go to edit
+                                        a blog and select the category you created below you shall see a preview of the
+                                        same delete the title and descrption of that catagory and tha's it you created
+                                        a catagory name.</li>
+                                </ul>
+                                Make Sure to :
+                                <ul>
+                                    <li>Choose type interviews for video</li>
+                                    <li>Type courses for image background</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
                             <h5 class="mb-0">
-                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Bugs to be removed:
-                              </button>
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                                    aria-expanded="false" aria-controls="collapseThree">
+                                    Bugs to be removed:
+                                </button>
                             </h5>
-                          </div>
-                          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                            <div class="card-body">
-                              <ul>
-                                  <li>Server side authentication</li>
-                              </ul>
-                            </div>
-                          </div>
                         </div>
-                      </div>
-    
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <ul>
+                                    <li>Server side authentication</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </nav>
-           
+
 
 
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">Note</li>
                     <li>
-                            If you run the website for the first time after a min gap of 30 min,
-                            The website will take time to load of around 10-15 sec from server side. This is because of 
-                            using free dyno. Also the dyno has a fixed uptime limit for a month, we recommend to purchase 
-                            community/hobby dyno for production purpose, or the site may go down.
+                        If you run the website for the first time after a min gap of 30 min,
+                        The website will take time to load of around 10-15 sec from server side. This is because of
+                        using free dyno. Also the dyno has a fixed uptime limit for a month, we recommend to purchase
+                        community/hobby dyno for production purpose, or the site may go down.
                     </li>
                 </ol>
             </nav>
 
 
-    </ng-container>
-</div>
+        </ng-container>
+    </div>
 </ng-container>
-<div class="card" *ngIf="!this.BCS.ls.islogged">
+<div class="card" *ngIf="!LS.islogged">
     <div class="card-header">
         Login Required
     </div>
@@ -162,7 +180,9 @@
         </p>
     </div>
     <div class="card-footer">
-        <button class="btn btn-dark" type="button"><app-login></app-login></button>
+        <button class="btn btn-dark" type="button">
+            <app-login></app-login>
+        </button>
         <a class="btn btn-dark" href="/">Website</a>
     </div>
 </div>

@@ -1,16 +1,16 @@
-<span *ngIf='ls.data.islogged==false' (click)='showlogin()'>
+<span *ngIf='ls.islogged==false' (click)='showlogin()'>
   Login
 </span>
-<span *ngIf='ls.data.islogged'>
+<span *ngIf='ls.islogged'>
   <a href="/dashboard" style="color:white">Dashboard</a>
 </span>
   
 
 <div id="logindiv" class="logindiv">  
       <button class="btn btn-danger cross" (click)="hidelogin()">X</button>
-        <div class="inner" *ngIf='ls.data.islogged==false'>
+        <div class="inner" *ngIf='ls.islogged==false'>
           <h3 class="text-center">Sign In</h3>
-            <div *ngIf='ls.data.islogged!=true'>
+            <div *ngIf='ls.islogged!=true'>
                 <p>
                     <!-- <label>Username :</label> -->
                     <input class="form-control" type="text" placeholder="Username"  id="loginformuser">
@@ -29,7 +29,7 @@
         </div>
         <div class="inner" *ngIf='false'>
           <h3 class="text-center">{{ ls.user.username }}</h3>
-            <div *ngIf='ls.data.islogged==true'>
+            <div *ngIf='ls.islogged==true'>
                   <p>
                     <!--input class="form-control" type="text" placeholder="Username"  id="loginformuser"-->
                     <button type="button" class="btn btn-primary" >Dashboard</button>

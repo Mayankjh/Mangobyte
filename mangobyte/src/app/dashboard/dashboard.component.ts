@@ -10,7 +10,7 @@ import { BlogService } from '../blog/blog.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private ls:LoginService, private BCS:BlogcategoryService, private BS:BlogService, private cdr:ChangeDetectorRef) {
+  constructor(private LS:LoginService, private BCS:BlogcategoryService, private BS:BlogService, private cdr:ChangeDetectorRef) {
     this.BCS.addChild(this);
     BS.addChild(this);
   }
@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
     this.nav_selected=nav[0];
     this.cdr.detectChanges();
     if (this.nav_selected=="Logout"){
-      this.ls.logout();
+      this.LS.logout();
       
     }
     //console.log(this.nav_selected, nav);
@@ -66,8 +66,8 @@ export class DashboardComponent implements OnInit {
     this.BCS.delete_bc(url);
   }
   ngOnInit() {
-    if(this.ls.data.islogged==false){
-      console.log(this.ls.child_elements);
+    if(this.LS.islogged==false){
+      console.log(this.LS.child_elements);
     }
     console.log()
   }

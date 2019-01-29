@@ -7,79 +7,21 @@ import { HttpParams, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class BlogcategoryService {
-  public child_elements: any = []
-  BlogCategories : any;
-  constructor(private ls: LoginService) {
+  
+  BlogCategories:any={};
+  constructor(private LS:LoginService){
     this.getAllBlogCategories();
   }
-  getAllBlogCategories() {
-    console.log("Get all blg cat called", this.BlogCategories)
-    this.BlogCategories={}
-    this.ls.http.get(this.ls.serverurl + 'blogs/blogcategory/').subscribe(
-      (data: any) => {
-        //console.log(data);
-        data.forEach(element => {
-          this.BlogCategories[element.url] = element;
-          if (this.BlogCategories[element.url].body[0] == "{")
-            this.BlogCategories[element.url].body = JSON.parse(this.BlogCategories[element.url].body)
-        });
-        //console.log(this.BlogCategories, this.child_elements);
-        this.refresh();
-      },
-      error => {
-        console.log(error);
-      },
-      ()=>{
-        console.log("Get all blg cat final", this.BlogCategories)
+  getAllBlogCategories(){
+    this.LS.http.get(this.LS.serverurl+'blogs/blogcategory/').subscribe((data:any)=>{
+      for(let x of data){
+        x.body = JSON.parse(x.body);
+        this.BlogCategories[x.url]=x;
       }
-    )
+      this.refresh();
+    })
   }
-  create_bc(parent_url: string, child_name: string) {
-
-    if (parent_url == "root" || parent_url == null) parent_url = '';
-    this.ls.http.post(this.ls.serverurl + "blogs/blogcategory/",
-      new HttpParams()
-        .set('name', child_name)
-        .set('parent', parent_url)
-        .set('creator', this.ls.data.user.url)
-        .set('body', '{"title":"Title of description","image":"../assets/images/course-5.jpg","disc":"Body Of description"}')
-      ,
-      {
-        headers: new HttpHeaders()
-          .set('Authorization', 'Token ' + this.ls.data.token)
-      }
-    ).subscribe(data => {
-      //console.log(data);
-      this.getAllBlogCategories();
-    }, error => {
-      console.log(error);
-    });
-  }
-  update_bc(url: string, name: string, body: string) {
-    return this.ls.http.patch(url,
-      new HttpParams().set('name', name).set('body', body),
-      { headers: this.ls.getHeaders() })
-  }
-  delete_bc(url: string, fun=()=>{}) {
-    // delete child blogcategories
-    //console.log(this.BlogCategories);
-      this.ls.http.delete(url, { headers: this.ls.getHeaders() }).subscribe(
-        data => {
-          console.log("Blog category {" + url + "} was deleted");
-        },
-        error => {
-          console.log("Error in deleting the blog:", error);
-        },
-        ()=>{
-          //finally 
-          this.getAllBlogCategories();
-          fun();
-        
-        }
-      );
-    
-  }
-
+  child_elements:any=[];
   refresh(){
     for(let x of this.child_elements){
       x.refresh();
@@ -89,5 +31,38 @@ export class BlogcategoryService {
     if(this.child_elements.indexOf(x)==-1){
       this.child_elements.push(x);
     }
+  }
+  create_bc(parent_url='', name=''){
+      this.LS.http.post(this.LS.serverurl+'blogs/blogcategory/', 
+        new HttpParams().set("name", name)
+          .set("category", parent_url)
+        ,{headers: this.LS.getHeaders()}).subscribe((data:any)=>{
+          this.BlogCategories[data.url]=data;
+          this.refresh();
+          // console.log(data);
+        })
+  }
+  delete_bc(url){
+    this.LS.http.delete(url, {headers: this.LS.getHeaders()}).subscribe(data=>{
+      delete this.BlogCategories[url];
+      this.refresh();
+    });
+  }
+  updateBlog(url:string, name:string, body:any=null){
+    // making sure to preserve other datas
+    console.log(body);
+    for(let x in body){
+      // body is a {}
+      
+      if(body[x].length == 0) continue;
+      this.BlogCategories[url].body[x]=body[x];
+    }
+    var json_body=JSON.stringify(this.BlogCategories[url].body);
+    console.log(json_body);
+    this.LS.http.patch(url, new HttpParams().set('name', name).set('body', json_body),{
+      headers:this.LS.getHeaders()
+    }).subscribe(data=>{
+      console.log(data);
+    })
   }
 }
