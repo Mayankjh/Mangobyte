@@ -30,6 +30,10 @@ import { PreviewdisplayerComponent } from './nav/previewdisplayer/previewdisplay
 import { EditbcComponent } from './nav/previewdisplayer/editbc/editbc.component';
 import { CommentComponent } from './courses/components/blogdetails/comment/comment.component';
 import {AccountComponent} from './account/account.component'
+import { LoginService } from './login/login.service';
+import { AccountService } from './account/account.service';
+import { BlogService } from './blog/blog.service';
+import { BlogcategoryService } from './blog/create/blogcategory/blogcategory.service';
 
 const appRoutes: Routes = [
   
@@ -71,7 +75,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {enableTracing:false}),
     HttpClientModule,
   ],
-  providers: [],
+  providers: [/*LoginService, AccountService, BlogService, BlogcategoryService*/],
   bootstrap: [AppComponent],
 
 })

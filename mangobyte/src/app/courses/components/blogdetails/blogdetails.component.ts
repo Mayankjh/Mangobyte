@@ -3,6 +3,9 @@ import { BlogcategoryService } from 'src/app/blog/create/blogcategory/blogcatego
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from 'src/app/blog/blog.service';
 import { LoginService } from 'src/app/login/login.service';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { initDomAdapter } from '@angular/platform-browser/src/browser';
+import { HttpParams } from '@angular/common/http';
 declare var $:any;
 @Component({
   selector: 'app-blogdetails',
@@ -16,44 +19,52 @@ export class BlogdetailsComponent implements OnInit {
   constructor(private BS:BlogService,private BLS:BlogService, private LS:LoginService) {
     this.BS.addChild(this);
     BLS.addChild(this);
-    if(this.BLS.allBlogs==null){
-      this.BLS.getAllBlogs();
-    }
-  
   }
   ngOnInit(){
-    //this.refresh();
-    //console.log("I was here in blg det", this.id);
-    if(this.BS.allBlogs==null)this.BS.getAllBlogs();
-
   }
   editable=false
   refresh(){
-    this.blog=this.BS.allBlogs[Number(this.id)];
-    //console.log(this.blog, this.BS.allBlogs);
-    for(let x of this.BS.allBlogs){
-      if(x.url==this.LS.serverurl+"blogs/blog/"+this.id+"/")this.blog=x;
+    this.id = this.LS.serverurl+'blogs/blog/'+this.id+'/'
+    this.blog=this.BS.Blogs[this.id];
+    // if blog doesn't have body, request it from server
+    if(!('body' in this.blog)){
+      this.BLS.getBlog(this.blog.url).subscribe((data:any)=>{
+        data.body = JSON.parse(data.body);
+        this.blog = data;
+        console.log("Blog retrived from server", this.blog);
+        if(!('html' in this.blog.body)){
+          this.blog.body['html']='';
+        }
+        this.fill_blog();
+      })
     }
-    if(this.blog==null)this.blog='404';
-    $.getScript('../../../assets/js/main.js');
-    console.log(this.blog);
   }
-  update_blog(head, author,disc1, authorimg,authdesc, media_url, disc2){
-    if(media_url.indexOf("https://drive.google.com/file/d/")!=-1){
-      // drive image
-      media_url="https://drive.google.com/uc?export=view&id="+media_url.split("/")[5];
-      }
-    this.editable=false;
+  fill_blog(){
+    document.getElementById("blog-container").innerHTML = this.blog.body.html;
+  }
+  update_blog(body){
     
-    var body = this.blog.body;
-    body.head = head;
-    body.author = author;
-    body.disc1 = disc1
-    body.authorimg = authorimg
-    body.authdesc = authdesc
-    body.media_url = media_url
-    body.disc2 = disc2
-    this.BS.update_blog(this.blog.url, this.blog.name, JSON.stringify(body))
+  }
+  edit(){
+    this.editable=true;
+  }
+  update(){
+    document.getElementById('editor')['contentWindow']['$']('#content-area').keditor('setContent', this.blog.body.html); 
+  }
+  get(){
+    this.blog.body.html=document.getElementById('editor')['contentWindow']['$']('#content-area').keditor('getContent'); 
+    this.fill_blog();
+  }
+  close(){
+    document.getElementById('editor')['src']='';
+  }
+  save(){
+    this.editable=false;
+    this.LS.http.patch(this.blog.url, new HttpParams().set('body', JSON.stringify(this.blog.body)), {
+      headers:this.LS.getHeaders()
+    }).subscribe(data=>{
+      alert("Blog saved, reload to verify!");
+    })
   }
   get_id_from_url(url){
     return url.split("/")[5]

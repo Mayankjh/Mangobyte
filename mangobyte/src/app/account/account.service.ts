@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ChangeDetectorRef } from '@angular/core';
 import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http'
 import { LoginService } from '../login/login.service';
 
@@ -7,6 +7,7 @@ import { LoginService } from '../login/login.service';
 })
 export class AccountService {
   startApp
+  users:any=[]
   initialized=false;
   constructor(public http:HttpClient,private LS:LoginService) { 
     var self = this;
@@ -26,11 +27,17 @@ export class AccountService {
             // nothing to do from server side
           } else {
             // user not already logged, so google login now note: login can still be denied from LS
+            console.log("Calling login");
             self.LS.google_login(window['auth2'].currentUser.get().getAuthResponse().id_token);
           } 
         }
       });
     };
+    console.log("Service called once");
+    
+  }
+  getAllUsers(){
+    
   }
   signinChanged(val, self){
     /**
@@ -39,13 +46,15 @@ export class AccountService {
      *  user is not logged : it wont be called
      * on login change: it will be called
      */
+    console.log("I was called", val);
+    try{
     if(val){
       // user is signed in
-      this.LS.google_login(window['auth2'].currentUser.get().getAuthResponse().id_token);
+      self.LS.google_login(window['auth2'].currentUser.get().getAuthResponse().id_token);
     } else {
       // user is logged out, first logout from LS
-
     }
+    } catch(e) {console.log(e);}
   }
   google_success(googleUser) {
     console.log(googleUser);
@@ -54,13 +63,17 @@ export class AccountService {
     console.log(error);
   }
   logout(){
-    var self=this;
+    console.log("AC logout called");
+    
+    window['auth2'].signOut();
     this.LS.logout((()=>{
-      window['auth2'].signOut();
+      console.log("Logging out from");
     }))
     
   }
   login(){
+    // check if google already logged? then logout
+    if(window['auth2'].isSignedIn.get()) window['auth2'].signOut();
     window['auth2'].signIn();
   }
   userChanged(val, self){
@@ -70,5 +83,4 @@ export class AccountService {
       return;
     }
   }
-  
 }

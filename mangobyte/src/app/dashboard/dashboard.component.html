@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-success" (click)="BCS.updateBlog(selected_blc, bcename.value, {'image':bceimage.value, 'title':bcetitle.value, 'disc':bcedisc.value})">Update</button>
+                        <button class="btn btn-success" (click)="BCS.update_bc(selected_blc, bcename.value, {'image':bceimage.value, 'title':bcetitle.value, 'disc':bcedisc.value})">Update</button>
                         <button class="btn btn-danger" (click)="BCS.delete_bc(selected_blc); selected_blc=null;">Delete</button>
                     </div>
                 </div>
@@ -180,9 +180,9 @@
         </p>
     </div>
     <div class="card-footer">
-        <button class="btn btn-dark" type="button">
-            <app-login></app-login>
-        </button>
+        <div class="btn">
+            <app-account [show]="'dashboard'"></app-account>
+        </div>
         <a class="btn btn-dark" href="/">Website</a>
     </div>
 </div>

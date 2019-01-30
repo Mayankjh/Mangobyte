@@ -16,7 +16,7 @@ export class LoginService {
   public after_verify:any=[];
 
   constructor(public http:HttpClient){
-    //this.serverurl="http://localhost:8000/";
+    this.serverurl="http://localhost:8000/";
     // check if user details present or not
       var token = localStorage.getItem('auth_token');
       //user = localStorage.getItem('auth_user');
@@ -28,8 +28,7 @@ export class LoginService {
         this.check_user(token);
       }
   }
-  check_user(token){
-    var self=this;
+  check_user(token, self=this){
     // check the server for user details
     this.http.get(this.serverurl+'users/status/', {
       headers: new HttpHeaders().set('Authorization', 'Token '+token)
@@ -59,31 +58,32 @@ export class LoginService {
           self.after_verify=[];
         });
   }
-  google_signup(id_token){
+  google_signup(id_token, self=this){
     if(this.islogged){
       // already logged in
       alert("You must logout before creating any new account");
     } else {
       // rest is same as google login
-      this.google_login(id_token);
+      this.google_login(id_token, self);
     }
   }
-  google_login(id_token){
+  google_login(id_token, self=this){
     // login only if verified == true
-    if(this.verified == false){
+    console.log('Google Login called', self.verified, self.islogged)
+    if(self.verified == false){
       console.log("User is not verified from server yet, so pushing the login to queue");
-      var self=this;
-      this.after_verify.push(()=>{self.google_login(id_token);})
+      self.after_verify.push(()=>{self.google_login(id_token);})
     } else {
       // user is verified
-      if(this.islogged){
+      if(self.islogged){
         console.log("user is already logged in, aborting!!!");
       } else {
         // its verified that user is not logged, so googl loging in now...
-        console.log('I was here')
-        this.http.post(this.serverurl+'logingoogle/', new HttpParams().set('id_token', id_token), {
+        //console.log('I was here');
+        self.verified=false;
+        self.http.post(self.serverurl+'logingoogle/', new HttpParams().set('id_token', id_token), {
         }).subscribe(data=>{
-            this.check_user(data['token']);
+            self.check_user(data['token']);
         })
       }
     }
@@ -99,6 +99,7 @@ export class LoginService {
   logout(after=()=>{}){
     this.http.post(this.serverurl+'logout/',{}, {headers:this.getHeaders()}).subscribe(data=>{
       after();
+      console.log("After logout, result fetched from server");
       this.islogged=false;
       this.data.user=null;
       this.refresh();

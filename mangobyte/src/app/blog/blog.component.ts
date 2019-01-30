@@ -15,13 +15,13 @@ export class BlogComponent implements OnInit {
   }
   refresh(){
     this.refreshed=true;
-    console.log('I was called');
+    //console.log('I was called');
     this.cdr.detectChanges();
   }
   ngOnInit() {
     var self=this;
-    if(this.do.show!="create")
-      this.BS.getblog(this.do['id'], self);
+    //if(this.do.show!="create")
+      //this.BS.getblog(this.do['id'], self);
   }
 
 }

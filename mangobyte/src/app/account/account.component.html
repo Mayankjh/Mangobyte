@@ -1,7 +1,7 @@
 <ng-container *ngIf="show=='icon'">
    <div class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" style="padding:0;" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <i *ngIf="!LS.islogged" class='fas fa-user'></i>
+      <i *ngIf="!LS.islogged" class='fas fa-user' style="color: blue;"></i>
       <img *ngIf="LS.islogged" class="account-image-small" src="{{LS.data.user.info.picture}}">
     </a>
     <div class="dropdown-menu dropdown-menu-right primary" aria-labelledby="navbarDropdown">
@@ -18,7 +18,7 @@
           </ng-container>
         </a>
       <div class="dropdown-divider" *ngIf="LS.islogged"></div>
-      <a class="dropdown-item" (click)="AC.logout()" href="javascript:void(0)">Logout</a>
+      <a class="dropdown-item" (click)="AC.logout()" *ngIf="LS.islogged" href="javascript:void(0)">Logout</a>
     </div>
   </div>
 </ng-container>

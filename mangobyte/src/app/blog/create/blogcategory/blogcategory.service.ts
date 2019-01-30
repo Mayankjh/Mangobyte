@@ -33,10 +33,12 @@ export class BlogcategoryService {
     }
   }
   create_bc(parent_url='', name=''){
+    if(parent_url=='root' || parent_url==null) parent_url='';
       this.LS.http.post(this.LS.serverurl+'blogs/blogcategory/', 
         new HttpParams().set("name", name)
           .set("category", parent_url)
         ,{headers: this.LS.getHeaders()}).subscribe((data:any)=>{
+          data.body = JSON.parse(data.body);
           this.BlogCategories[data.url]=data;
           this.refresh();
           // console.log(data);
@@ -48,7 +50,7 @@ export class BlogcategoryService {
       this.refresh();
     });
   }
-  updateBlog(url:string, name:string, body:any=null){
+  update_bc(url:string, name:string, body:any=null){
     // making sure to preserve other datas
     console.log(body);
     for(let x in body){

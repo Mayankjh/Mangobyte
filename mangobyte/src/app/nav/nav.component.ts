@@ -29,9 +29,9 @@ export class NavComponent implements OnInit{
     this.ngAfterViewInit();
     this.cdr.detectChanges();
     document.scrollingElement.scrollTop=0;
-    console.log(nav, this.nav_selected);
+    //console.log(nav, this.nav_selected);
     this.loc.go(nav[0]);
-    console.log(this.nav_selected, this.show_blog);
+    //console.log(this.nav_selected, this.show_blog);
   }
   ngAfterViewInit(){
     

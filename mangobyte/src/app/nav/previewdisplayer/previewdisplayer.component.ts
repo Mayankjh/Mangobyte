@@ -19,9 +19,11 @@ export class PreviewdisplayerComponent implements OnInit {
   }
   editable=false
   refresh(){
+    //console.log(this.parent_bc);
+    console.log(this.blog_list, this.group_list, this.BCS.BlogCategories);
+    if(!(this.parent_bc in this.BCS.BlogCategories)) return;
     this.group_list=this.BCS.BlogCategories[this.parent_bc].child_categories;
-    this.blog_list=this.BCS.BlogCategories[this.parent_bc].child_blogs;
-    console.log(this.blog_list, this.group_list);
+    this.blog_list=this.BCS.BlogCategories[this.parent_bc].child_blogs;    
     this.cdr.detectChanges();
   }
   changeto(v){
@@ -36,21 +38,15 @@ export class PreviewdisplayerComponent implements OnInit {
   ngAfterViewInit() {
     $.getScript('../assets/js/main.js');
   }
-  update_blog(blog, name, date, username, media_url, disc){
-    if(media_url.indexOf("https://drive.google.com/file/d/")!=-1){
-      // drive image
-      media_url="https://drive.google.com/uc?export=view&id="+media_url.split("/")[5];
-      }
-      var body = blog.body;
-      body.date = date;
-      body.username = username;
-      body.media_url = media_url;
-      body.disc = disc;
-    this.editable=false;
-    this.BLS.update_blog(blog.url, name, JSON.stringify(body))
-  }
   get_id_from_url(url){
     return url.split("/")[5]
   }
-
+  type(body){
+    if(body==undefined || body==null) return -1;
+    return Object.keys(body).length
+  }
+  dump(str){
+    console.log(str);
+    return str;
+  }
 }

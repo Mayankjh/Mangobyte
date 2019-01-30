@@ -14,18 +14,13 @@ export class AccountComponent implements OnInit {
   constructor(private cdr:ChangeDetectorRef, private AC:AccountService, private LS:LoginService) { 
     LS.addChild(this);  
   }
-  googleUser = {};
-
-  startApp
-  ngOnInit() {
-    
+  ngOnInit() { 
   }
   ngAfterViewInit() {
     this.AC.startApp();
   }
   refresh(){
-    //var self=this;
     this.cdr.detectChanges();
-    //console.log(this);
+    console.log(this.LS.islogged, "\n CDR was called account component")
   }
 }
