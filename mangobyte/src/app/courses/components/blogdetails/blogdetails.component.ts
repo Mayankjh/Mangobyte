@@ -24,23 +24,21 @@ export class BlogdetailsComponent implements OnInit {
   }
   editable=false
   refresh(){
+    
     this.id = this.LS.serverurl+'blogs/blog/'+this.id+'/'
     this.blog=this.BS.Blogs[this.id];
+    console.log("refresh blogdetails was called!", this.blog)
     // if blog doesn't have body, request it from server
     if(!('body' in this.blog)){
       this.BLS.getBlog(this.blog.url).subscribe((data:any)=>{
-        data.body = JSON.parse(data.body);
         this.blog = data;
         console.log("Blog retrived from server", this.blog);
-        if(!('html' in this.blog.body)){
-          this.blog.body['html']='';
-        }
-        this.fill_blog();
       })
     }
+    this.fill_blog();
   }
   fill_blog(){
-    document.getElementById("blog-container").innerHTML = this.blog.body.html;
+    document.getElementById("blog-container").innerHTML = this.blog.body;
   }
   update_blog(body){
     
@@ -49,10 +47,10 @@ export class BlogdetailsComponent implements OnInit {
     this.editable=true;
   }
   update(){
-    document.getElementById('editor')['contentWindow']['$']('#content-area').keditor('setContent', this.blog.body.html); 
+    document.getElementById('editor')['contentWindow']['$']('#content-area').keditor('setContent', this.blog.body); 
   }
   get(){
-    this.blog.body.html=document.getElementById('editor')['contentWindow']['$']('#content-area').keditor('getContent'); 
+    this.blog.body=document.getElementById('editor')['contentWindow']['$']('#content-area').keditor('getContent'); 
     this.fill_blog();
   }
   close(){
@@ -60,7 +58,7 @@ export class BlogdetailsComponent implements OnInit {
   }
   save(){
     this.editable=false;
-    this.LS.http.patch(this.blog.url, new HttpParams().set('body', JSON.stringify(this.blog.body)), {
+    this.LS.http.patch(this.blog.url, new HttpParams().set('body', this.blog.body), {
       headers:this.LS.getHeaders()
     }).subscribe(data=>{
       alert("Blog saved, reload to verify!");
