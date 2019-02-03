@@ -8,8 +8,7 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
   constructor(private ls:LoginService, private cdr:ChangeDetectorRef) {
-    var self=this;
-    ls.child=self;
+    ls.addChild(this);
   }
   ngOnInit() {
   }
@@ -30,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
   login(){
     var self=this;
-    this.ls.login(
+    this.ls.up_login(
       document.getElementById("loginformuser")['value'], 
       document.getElementById("loginformpass")['value'],
       

@@ -1,0 +1,46 @@
+<br><br>
+    <ul class="comment-list" >
+      
+            <li class="comment" *ngFor="let comment of comments">
+                <div >
+                <div class="vcard bio">
+                      <img src="assets/images/person_1.jpg" alt="Image placeholder">
+                    </div>
+                    <div class="comment-body">
+                      <h3>User</h3>
+                      <div class="meta">June 27, 2018 at 2:21pm</div>
+                      <p>{{comment.body}}</p>
+                      <!--p><a href="javascript:void(0)" class="reply">Reply</a></p-->
+                    </div>
+                    <app-comment [blog]='blog' [comments]='comment.comments' [position]='position+","+comments.indexOf(comment)'></app-comment>
+            </div>
+                </li>
+
+        <!--button class="btn btn-primary" (click)='showcomment(); commentto.value=position+","+comments.indexOf(comment);'>Reply</button-->
+    </ul>
+    <button class="btn btn-primary" (click)='showcomment(); commentto.value=position'>Reply</button>
+<div class="commentdiv" id="comment123">
+<div class="card" style="position: absolute; top:50%; left: 50%; transform: translate(-50%, -50%);padding:30px;">
+   
+   <div class="card-body">
+    <h5 class="card-title text-center">Add comment <hr>
+        <app-account [show]='"dashboard"'></app-account>
+        <hr>
+    </h5>
+    <div>
+        <div *ngIf="AC.islogged">
+                <input type="hidden" #commentto>
+                <p type="text" class="form-control" #content contenteditable="true"></p><br>
+                <button class="btn btn-primary" (click)="CS.comment(
+                    AC.user.getAuthResponse().id_token,
+                    blog.url,
+                    position,
+                    content.innerText
+                );">Submit</button>
+                        
+        </div>
+    <button class="btn btn-warning" (click)="hidecomment()">Close</button>
+    </div>
+  </div>
+</div>
+</div>

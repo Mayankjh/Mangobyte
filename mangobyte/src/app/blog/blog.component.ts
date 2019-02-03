@@ -10,18 +10,18 @@ export class BlogComponent implements OnInit {
   @Input() do:any;
   public blog:any;
   refreshed=false;
-  constructor(private bs:BlogService,private cdr:ChangeDetectorRef) {
+  constructor(private BS:BlogService,private cdr:ChangeDetectorRef) {
+    BS.addChild(this);
   }
   refresh(){
     this.refreshed=true;
-    console.log('I was called');
+    //console.log('I was called');
     this.cdr.detectChanges();
   }
   ngOnInit() {
-    this.bs.child = this;
     var self=this;
-    if(this.do.show!="create")
-      this.bs.getblog(this.do['id'], self);
+    //if(this.do.show!="create")
+      //this.BS.getblog(this.do['id'], self);
   }
 
 }

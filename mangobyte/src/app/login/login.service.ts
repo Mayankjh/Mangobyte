@@ -7,131 +7,118 @@ import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 })
 export class LoginService {
   public serverurl:string="https://hashblog.herokuapp.com/";
-  public data:{
-    islogged:boolean,
-    token:string 
+  public data={
+    user:null,
+    token:null
   }
-  public user:any;
-  public child;
-  constructor(public http: HttpClient) { 
-    this.data={
-      islogged:false,
-      token:''
-    }
-    // this.serverurl = "http://localhost:8000/";
-    var token = localStorage.getItem('auth_token');
-    if(token==null){
-      // user not logged
-      // _tell child elements to get their body content
-      
-      
-    } else {
-      // user can be logged
-      this.check_user();
-      
-    }
-     /*window['httpclient']=this.http;
-     window['httpheader']=new HttpHeaders();
-     window['httpparam']=new HttpParams();*/
+  public islogged = false;
+  public verified = false;
+  public after_verify:any=[];
 
+  constructor(public http:HttpClient){
+    this.serverurl="http://localhost:8000/";
+    // check if user details present or not
+      var token = localStorage.getItem('auth_token');
+      //user = localStorage.getItem('auth_user');
+      if(token==null){
+        // user is not logged
+        this.islogged = false;
+        this.verified = true;
+      } else {
+        this.check_user(token);
+      }
   }
-  check_user(){
-    this.http.get(this.serverurl+'users/1/', 
-    { 
-      headers:new HttpHeaders()
-        .set('Authorization', 'Token '+localStorage.auth_token)
+  check_user(token, self=this){
+    // check the server for user details
+    this.http.get(this.serverurl+'users/status/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+token)
+      }).subscribe(data=>{
+          try{
+          self.data.token=token;
+          self.data.user = data['user'];
+          self.data.user.info = JSON.parse(data['user'].info);
+          self.islogged = true;
+          localStorage.setItem('auth_token', token);
+          console.log(self.data.user);
+          self.refresh();
+          } catch(e){
+            console.log(e);
+          }
+        }, error => {
+          console.log('errors occured', error);
+          self.islogged=false;
+          // remove un-necessary token
+          localStorage.removeItem('auth_token');
+        }, ()=>{
+          self.verified = true;
+          console.log("User is verified now ")
+          for(let x of self.after_verify){
+            x();
+          }
+          self.after_verify=[];
+        });
+  }
+  google_signup(id_token, self=this){
+    if(this.islogged){
+      // already logged in
+      alert("You must logout before creating any new account");
+    } else {
+      // rest is same as google login
+      this.google_login(id_token, self);
     }
-    ).subscribe(data=>{
-        this.user = data;
-        this.data.islogged = true;
-        this.data.token = localStorage.getItem('auth_token')
-        console.log(data)
-      }, error=>{
-        this.data={
-          islogged:false,
-          token:''
-        }
-        localStorage.removeItem('auth_token');
-    }, ()=>{
-      
+  }
+  google_login(id_token, self=this){
+    // login only if verified == true
+    console.log('Google Login called', self.verified, self.islogged)
+    if(self.verified == false){
+      console.log("User is not verified from server yet, so pushing the login to queue");
+      self.after_verify.push(()=>{self.google_login(id_token);})
+    } else {
+      // user is verified
+      if(self.islogged){
+        console.log("user is already logged in, aborting!!!");
+      } else {
+        // its verified that user is not logged, so googl loging in now...
+        //console.log('I was here');
+        self.verified=false;
+        self.http.post(self.serverurl+'logingoogle/', new HttpParams().set('id_token', id_token), {
+        }).subscribe(data=>{
+            self.check_user(data['token']);
+        })
+      }
+    }
+  }
+  onLoginSuccess(token){
+    this.islogged=true;
+  }
+  up_login(username, password){
+    if(this.islogged) {
+      alert("User is already logged!!");
+    }
+  }
+  logout(after=()=>{}){
+    this.http.post(this.serverurl+'logout/',{}, {headers:this.getHeaders()}).subscribe(data=>{
+      after();
+      console.log("After logout, result fetched from server");
+      this.islogged=false;
+      this.data.user=null;
+      this.refresh();
     })
   }
-  login(username:string, password:string){
-    this.http.post(this.serverurl+'login/',
-        new HttpParams()
-          .set('username', username)
-          .set('password', password),
-        { 
-          // no headers needed to be sent this time
-          observe:'response'
-        }
-      ).subscribe((response)=>{
-        //console.log(response);
-        if(response.status==200){
-          //login sucessfull
-          var data = response.body;
-          this.data.token = data['token'];
-          this.data.islogged=true;
-          localStorage.setItem('auth_token', this.data.token);
-          console.log(response, localStorage.getItem('auth_token'));
-          this.check_user();
-        } 
-        this.child.refresh();
-        this.refresh();
-      }, (error)=>{
-        if(error.status==400 || 404){
-          // failure
-          alert('Wrong credentials were provided, please provide the correct details');
-        }
-      }, ()=>{
-        document.getElementById("logindiv").style.display="none";
-        this.refresh();
-        //window.location.reload();
-        //alert('Login Successful');
-        
-      });
-  }
-
-  logout(){
-    this.http.post(this.serverurl+'logout/',{},
-        { 
-          // no headers needed to be sent this time
-          observe:'response',
-          headers:new HttpHeaders()
-            .set('Authorization', 'Token '+this.data.token)
-        }
-      ).subscribe((response)=>{
-        console.log(response);
-        localStorage.removeItem('auth_token');
-        if(response.status==200 || response.status==204){
-          
-          localStorage.removeItem('auth_token');
-          this.data={
-            islogged:false,
-            token:''
-          }
-
-        } else if(response.status==400 || 404){
-          // failure
-          alert('Wrong credentials were provided');
-        }
-        //console.log(response, this.child);
-        this.child.refresh();
-      }, (error)=>{
-        localStorage.removeItem('auth_token');
-        this.data={
-          islogged:false,
-          token:''
-        }
-      });
-  }
   public getHeaders(){
-    if(this.data.islogged)
+    if(this.islogged)
     return new HttpHeaders().set("Authorization", "Token "+ this.data.token);
     else return new HttpHeaders();
   }
+  login(){
 
+  }
+  
+  
+  
+  
   //refresh childs
+  
   child_elements=[];
   refresh(){
     for(let x in this.child_elements){
@@ -144,3 +131,4 @@ export class LoginService {
     }
   }
 }
+

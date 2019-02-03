@@ -1,32 +1,33 @@
 <div class="row col-md-12 d-flex ftco-animate">
-      <div *ngFor="let blog of blog_list" class="blog-entry align-self-stretch col-md-4">
-        <a [attr.href]="this.BLS.allBlogs[blog].blog_type!='2'?'/'+get_id_from_url(this.BLS.allBlogs[blog].url):null">
-        <img class="block-20" src="{{this.BLS.allBlogs[blog].body.media_url}}">
+      <div *ngFor="let blog of blog_list" class="col-md-4" style="height:100%;">
+        <a [attr.href]="this.BLS.Blogs[blog].blog_type!='2'?'/'+get_id_from_url(this.BLS.Blogs[blog].url):null">
+        <img class="block-20" src="{{this.BLS.Blogs[blog].preview.med_url}}">
         </a>
         <div class="text p-4 d-block">
           <div class="meta mb-3">
             <div><span [hidden]="!editable">Date:</span>
-                <a [ngClass]="{'btn btn-primary':editable}" [attr.contenteditable]="editable" #date>{{this.BLS.allBlogs[blog].body.date}}</a>
+                <a [ngClass]="{'form-control':editable}" [attr.contenteditable]="editable" #date>{{this.BLS.Blogs[blog].preview.date}}</a>
             </div>
-            <div><span [hidden]="!editable">U Name:</span><a [ngClass]="{'btn btn-primary':editable}" [attr.contenteditable]="editable" #uname>{{this.BLS.allBlogs[blog].body.username}}</a></div>
-            <div><span [hidden]="!editable">Media:</span><a [ngClass]="{'btn btn-primary':editable}" class="meta-chat" [attr.contenteditable]="editable" [hidden]="!editable" #med_url>{{this.BLS.allBlogs[blog].body.media_url}}</a></div>
+            <div><span [hidden]="!editable">U Name:</span><a [ngClass]="{'form-control':editable}" [attr.contenteditable]="editable" #uname>{{this.BLS.Blogs[blog].preview.uname}}</a></div>
+            <div><span [hidden]="!editable">Media:</span><a [ngClass]="{'form-control':editable}" class="meta-chat" [attr.contenteditable]="editable" [hidden]="!editable" #med_url>{{this.BLS.Blogs[blog].preview.med_url}}</a></div>
           </div>
-          <h3 class="heading mt-3"><a [attr.contenteditable]="editable" #name>{{this.BLS.allBlogs[blog].name}}</a></h3>
-          <p [ngClass]="{'btn btn-primary':editable}" [attr.contenteditable]="editable" #disc>{{this.BLS.allBlogs[blog].body.disc}}</p>
+          <h3 class="heading mt-3"><a [attr.contenteditable]="editable" #name>{{this.BLS.Blogs[blog].name}}</a></h3>
+          <p [ngClass]="{'form-control':editable}" [attr.contenteditable]="editable" #disc>{{this.BLS.Blogs[blog].preview.disc}}</p>
         </div>
-        <button *ngIf="!editable && this.LS.data.islogged" (click)="editable=!editable" class="btn btn-danger">
+        <button *ngIf="!editable && this.LS.islogged" (click)="editable=!editable" class="btn btn-danger">
           <i class="fas fa-edit"></i>
         </button>
-        <button *ngIf="editable" class="btn btn-success" (click)="update_blog(
-          this.BLS.allBlogs[blog],
+        <button *ngIf="editable" class="btn btn-success" (click)="this.BLS.update_blog(
+          blog,
           name.innerText,
-          date.innerText,
-          uname.innerText,
-          med_url.innerText,
-          disc.innerText
-        )"><i class="fas fa-save"></i></button>
+          {'date':date.innerText,
+          'uname':uname.innerText,
+          'med_url':med_url.innerText,
+          'disc':
+          disc.innerText}
+        ); editable=false;"><i class="fas fa-save"></i></button>
         <button *ngIf="editable" class="btn btn-danger" (click)="
-          this.BLS.deleteBlog(this.BLS.allBlogs[blog].url)
+          this.BLS.deleteBlog(this.BLS.Blogs[blog].url)
         "><i class="fas fa-trash"></i></button>
       </div>
 </div>
@@ -35,7 +36,7 @@
   <div class="container">
     <div class="row">
         <ng-container *ngFor="let gl of group_list">
-          <ng-container *ngIf="this.BCS.BlogCategories[gl].body.disc!=''">
+          <ng-container *ngIf="type(this.BCS.BlogCategories[gl].body)!=0">
             <div class="col-md-4 d-flex">
               <div class="course align-self-stretch" style="margin-bottom:10px;">
                 <img src="{{this.BCS.BlogCategories[gl].body.image}}" style="max-width:100%;" class="img">
@@ -48,7 +49,7 @@
               </div>
             </div>
           </ng-container>
-          <ng-container *ngIf="this.BCS.BlogCategories[gl].body.disc==''">
+          <ng-container *ngIf="type(this.BCS.BlogCategories[gl].body)==0">
                       <div class="col-md-12 heading-section ftco-animate text-center">
                         <h2 class="mb-4">{{this.BCS.BlogCategories[gl].name}}</h2>
                         <app-previewdisplayer [parent_bc]="gl"></app-previewdisplayer>

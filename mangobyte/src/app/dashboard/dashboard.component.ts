@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { BlogcategoryService } from '../blog/create/blogcategory/blogcategory.service';
 import { BlogService } from '../blog/blog.service';
+import { AccountService } from '../account/account.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,9 +11,14 @@ import { BlogService } from '../blog/blog.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private ls:LoginService, private BCS:BlogcategoryService, private BS:BlogService, private cdr:ChangeDetectorRef) {
+  constructor(private LS:LoginService, 
+        private BCS:BlogcategoryService, 
+        private AS:AccountService,
+        private BS:BlogService, 
+        private cdr:ChangeDetectorRef) {
     this.BCS.addChild(this);
     BS.addChild(this);
+    this.LS.addChild(this);
   }
   nav_list=[
     ["Home", ""],
@@ -25,8 +31,7 @@ export class DashboardComponent implements OnInit {
     this.nav_selected=nav[0];
     this.cdr.detectChanges();
     if (this.nav_selected=="Logout"){
-      this.ls.logout();
-      
+      this.AS.logout();
     }
     //console.log(this.nav_selected, nav);
   }
@@ -38,7 +43,7 @@ export class DashboardComponent implements OnInit {
     document.getElementById("bce_image_prev").style.backgroundImage='url('+this.BCS.BlogCategories[this.selected_blc].body.image+')';
 
   }
-  update_bc(){
+  /*update_bc(){
     // get all the elements
     var url = this.selected_blc, img = document.getElementById('bce_image').innerText, name = document.getElementById('bce_name').innerText,
       title = document.getElementById('bce_title').innerText, disc = document.getElementById('bce_desc').innerText;
@@ -59,20 +64,20 @@ export class DashboardComponent implements OnInit {
         console.log(error)
       });
 
-  }
+  }*/
   delete_bc(){
     var url = this.selected_blc;
     this.selected_blc=null;
     this.BCS.delete_bc(url);
   }
   ngOnInit() {
-    if(this.ls.data.islogged==false){
-      console.log(this.ls.child_elements);
+    if(this.LS.islogged==false){
+      console.log(this.LS.child_elements);
     }
     console.log()
   }
   refresh(){
-    console.log('I was caslled')
+    //console.log('I was caslled')
     this.cdr.detectChanges();
   }
 }
